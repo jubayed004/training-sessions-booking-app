@@ -27,7 +27,7 @@ class CustomSessionCard extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     double cardWidth = screenWidth * 0.9;
-    double cardHeight = screenHeight * 0.2+50;
+    double cardHeight = screenHeight * 0.2+15;
     return Container(
       width: screenWidth,
       height: cardHeight,

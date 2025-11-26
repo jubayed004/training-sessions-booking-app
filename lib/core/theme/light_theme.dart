@@ -21,18 +21,18 @@ final ThemeData lightTheme = ThemeData(
       backgroundColor: AppColors.primaryColor,
       foregroundColor: AppColors.white,
       minimumSize: const Size(140, 32),
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
 
       textStyle: GoogleFonts.nunito(fontSize: 14, fontWeight: FontWeight.w600),
     ),
   ),
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      side: const BorderSide(color: AppColors.bgSecondaryButtonColor),
-      foregroundColor: Colors.black,
-      minimumSize: const Size(186, 48),
-      padding: const EdgeInsets.all(10),
-      shape: CircleBorder(side: BorderSide(color: AppColors.bgSecondaryButtonColor)),
+      side: const BorderSide(color: AppColors.primaryColor),
+      foregroundColor: Colors.white,
+      minimumSize: const Size(140, 32),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+     /* shape: CircleBorder(side: BorderSide(color: AppColors.bgSecondaryButtonColor)),*/
       textStyle: GoogleFonts.nunito(fontSize: 14, fontWeight: FontWeight.w600),
     ),
   ),
@@ -133,19 +133,19 @@ final ThemeData lightTheme = ThemeData(
     ),
     bodySmall: GoogleFonts.nunito(
       fontSize: 12,
-      fontWeight: FontWeight.w200,
-      color: AppColors.grayTertiaryTextColor,
+      fontWeight: FontWeight.w500,
+      color: AppColors.blackMainTextColor,
     ),
     labelSmall: GoogleFonts.nunito(
       fontSize: 12,
       fontWeight: FontWeight.w400,
       color: AppColors.grayTertiaryTextColor,
-    ),/*
+    ),
     labelMedium: GoogleFonts.nunito(
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-      color: AppColors.grayTertiaryTextColor,
-    ),*/
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
+      color: AppColors.blackMainTextColor,
+    ),
       labelLarge: GoogleFonts.nunito(
       fontSize: 12,
       fontWeight: FontWeight.w600,

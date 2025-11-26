@@ -89,7 +89,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                 ),
                               ),
                             ),
-                         /*   Padding(
+                      /*      Padding(
                               padding: const EdgeInsets.only(bottom: 18.0),
                               child: Text(
                                 _controller.labels[index],

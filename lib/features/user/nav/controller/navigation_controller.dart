@@ -28,9 +28,9 @@ class NavigationController extends GetxController {
 
   final List<String> labels = [
     "Home",
-    "Explore",
+    "Coach",
+    "Bookings",
     "Chat",
-    "My Pets",
     "Profile",
   ];
 }
