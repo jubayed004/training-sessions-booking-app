@@ -1,24 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_trainer/core/router/route_path.dart';
-import 'package:my_trainer/features/splash/splash_screen.dart';
+import 'package:my_trainer/features/auth/login/login_screen.dart';
+import 'package:my_trainer/features/auth/vendor_selection/vendor_selection_screen.dart';
+import 'package:my_trainer/features/welcome/welcome_screen.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter initRoute = GoRouter(
-    initialLocation: RoutePath.splashScreen.addBasePath,
+    initialLocation: RoutePath.welcomeScreen.addBasePath,
     debugLogDiagnostics: true,
     navigatorKey: navigatorKey,
     routes: [
       ///======================= Initial Route =======================
       GoRoute(
-        name: RoutePath.splashScreen,
-        path: RoutePath.splashScreen.addBasePath,
+        name: RoutePath.welcomeScreen,
+        path: RoutePath.welcomeScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child: const SplashScreen(),
+            child: const WelcomeScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.vendorSelectionScreen,
+        path: RoutePath.vendorSelectionScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const VendorSelectionScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.loginScreen,
+        path: RoutePath.loginScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const LoginScreen(),
             state: state,
           );
         },

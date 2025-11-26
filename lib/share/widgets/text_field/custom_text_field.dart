@@ -101,7 +101,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           spacing: 8,
           children: [
             if(widget.title != null)
-              CustomAlignText(text: widget.title ?? ""),
+              CustomAlignText(text: widget.title ?? "",style: Theme.of(context).textTheme.bodyLarge,),
             TextFormField(
               onTap: widget.onTap,
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -123,11 +123,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
               validator: widget.validator,
               decoration: InputDecoration(
                 fillColor: widget.fillColor,
-                contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
+                contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
                 isCollapsed: widget.isCollapsed,
                 isDense: widget.isDense,
                 errorMaxLines: 2,
                 hintText: widget.hintText,
+
                 filled: true,
                 prefixIcon: widget.prefixIcon,
                 prefix: widget.prefix,

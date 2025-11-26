@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
 
     return Material(
       color: backgroundColor,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(16),
       child: InkWell(
         onTap: isLoading ? null : onTap,
         child: Container(
@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(16),
           ),
           child: buildChild(context),
         ),
