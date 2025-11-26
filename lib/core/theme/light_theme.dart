@@ -21,8 +21,8 @@ final ThemeData lightTheme = ThemeData(
       backgroundColor: AppColors.primaryColor,
       foregroundColor: AppColors.white,
       minimumSize: const Size(140, 32),
-      padding: const EdgeInsets.all(10),
-      shape: CircleBorder(side: BorderSide(color: AppColors.primaryColor)),
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+
       textStyle: GoogleFonts.nunito(fontSize: 14, fontWeight: FontWeight.w600),
     ),
   ),
@@ -51,8 +51,8 @@ final ThemeData lightTheme = ThemeData(
     filled: true,
     fillColor: AppColors.backgroundColor,
     iconColor: AppColors.grayTextSecondaryColor,
-    prefixIconColor: AppColors.grayTextSecondaryColor,
-    suffixIconColor: AppColors.grayTextSecondaryColor,
+    prefixIconColor: AppColors.grayTertiaryTextColor,
+    suffixIconColor: AppColors.grayTertiaryTextColor,
     contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 14),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
@@ -80,8 +80,8 @@ final ThemeData lightTheme = ThemeData(
     ),
     hintStyle: GoogleFonts.nunito(
       fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: AppColors.blackMainTextColor,
+      fontWeight: FontWeight.w500,
+      color: AppColors.grayTertiaryTextColor,
     ),
     errorStyle: GoogleFonts.nunito(
       fontSize: 12,
@@ -90,6 +90,17 @@ final ThemeData lightTheme = ThemeData(
     ),
   ),
   textTheme: TextTheme(
+
+    headlineLarge: GoogleFonts.nunito(
+      fontSize: 32,
+      fontWeight: FontWeight.w800,
+      color: AppColors.blackMainTextColor,
+    ),
+    headlineMedium: GoogleFonts.nunito(
+      fontSize: 28,
+      fontWeight: FontWeight.w800,
+      color: AppColors.blackMainTextColor,
+    ),
     headlineSmall: GoogleFonts.nunito(
       fontSize: 24,
       fontWeight: FontWeight.w800,
@@ -125,5 +136,20 @@ final ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.w200,
       color: AppColors.grayTertiaryTextColor,
     ),
+    labelSmall: GoogleFonts.nunito(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      color: AppColors.grayTertiaryTextColor,
+    ),/*
+    labelMedium: GoogleFonts.nunito(
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      color: AppColors.grayTertiaryTextColor,
+    ),*/
+      labelLarge: GoogleFonts.nunito(
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+      color: AppColors.grayTertiaryTextColor,
+    )
   ),
 );

@@ -11,6 +11,7 @@ class AppStrings {
 
   static const String letsGetStarted = "let's_get_started";
   static const String email = "email";
+  static const String easilySelectTime = "easily_select_time";
   static const String enterYourEmailAddress = "enter_your_email_address";
   static const String password = "password";
   static const String enterYourPassword = "enter_your_password";
@@ -110,7 +111,7 @@ class AppStrings {
   static const String online = "online";
   static const String homePage = "home_page";
   static const String coach = "coach";
-  static const String booking = "booking";
+  static const String booking = "bookings";
   static const String chat = "chat";
   static const String profile = "profile";
   static const String enterMessage = "enter_message";

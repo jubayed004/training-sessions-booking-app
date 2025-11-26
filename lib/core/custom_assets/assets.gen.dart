@@ -39,8 +39,17 @@ class $AssetsIconsGen {
   SvgGenImage get documentDownload =>
       const SvgGenImage('assets/icons/document-download.svg');
 
+  /// File path: assets/icons/h.svg
+  SvgGenImage get h => const SvgGenImage('assets/icons/h.svg');
+
+  /// File path: assets/icons/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/icons/home.svg');
+
   /// File path: assets/icons/messages-2.svg
   SvgGenImage get messages2 => const SvgGenImage('assets/icons/messages-2.svg');
+
+  /// File path: assets/icons/messages.svg
+  SvgGenImage get messages => const SvgGenImage('assets/icons/messages.svg');
 
   /// File path: assets/icons/profile-2user.svg
   SvgGenImage get profile2user =>
@@ -65,7 +74,10 @@ class $AssetsIconsGen {
     calendar,
     camera,
     documentDownload,
+    h,
+    home,
     messages2,
+    messages,
     profile2user,
     profile,
     verify,
@@ -79,6 +91,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/Online Support.png
   AssetGenImage get onlineSupport =>
       const AssetGenImage('assets/images/Online Support.png');
+
+  /// File path: assets/images/home-2.png
+  AssetGenImage get home2 => const AssetGenImage('assets/images/home-2.png');
+
+  /// File path: assets/images/home_book_a_session.png
+  AssetGenImage get homeBookASession =>
+      const AssetGenImage('assets/images/home_book_a_session.png');
 
   /// File path: assets/images/loginimage.png
   AssetGenImage get loginimage =>
@@ -105,6 +124,8 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     onlineSupport,
+    home2,
+    homeBookASession,
     loginimage,
     upcomeingsessionimage,
     v,

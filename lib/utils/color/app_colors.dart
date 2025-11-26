@@ -18,4 +18,5 @@ class AppColors {
   static const Color grayTabBgColor = Color(0xFFF7F7F7);
   static const Color greenTextColor = Color(0xFF0C8A8A);
   static const Color blueTextColor = Color(0xFF355979);
+  static const Color appbarTextColor = Color(0xFFE94E6C);
 }

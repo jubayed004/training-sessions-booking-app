@@ -20,7 +20,7 @@ class VendorSelectionScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/vendorseletionimage.png'),
+            image: AssetImage('assets/images/v.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -69,12 +69,12 @@ class VendorSelectionScreen extends StatelessWidget {
                     ),
                     Gap(32),
                     CustomButton(
-                        onTap: ()=>AppRouter.route.pushNamed(RoutePath.vendorSelectionScreen),
+                        onTap: ()=>AppRouter.route.pushNamed(RoutePath.signUpScreen),
                         text: AppStrings.continueAsClient.tr
                     ),
                     Gap(16),
                     CustomButton(
-                        onTap: ()=>AppRouter.route.pushNamed(RoutePath.vendorSelectionScreen),
+                        onTap: ()=>AppRouter.route.pushNamed(RoutePath.signUpScreen),
                         text: AppStrings.continueAsTrainer.tr
                     ),
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_trainer/share/widgets/align/custom_align_text.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
+import 'package:my_trainer/utils/extension/base_extension.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -101,7 +102,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           spacing: 8,
           children: [
             if(widget.title != null)
-              CustomAlignText(text: widget.title ?? "",style: Theme.of(context).textTheme.bodyLarge,),
+              CustomAlignText(text: widget.title ?? "",style: context.bodyLarge,),
             TextFormField(
               onTap: widget.onTap,
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -123,7 +124,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               validator: widget.validator,
               decoration: InputDecoration(
                 fillColor: widget.fillColor,
-                contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 16.0),
+                contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 12.0),
                 isCollapsed: widget.isCollapsed,
                 isDense: widget.isDense,
                 errorMaxLines: 2,
