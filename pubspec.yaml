@@ -49,6 +49,9 @@ dependencies:
   cached_network_image: ^3.4.1
   dropdown_button2: ^2.3.9
   google_fonts: ^6.3.2
+  flutter_screenutil: ^5.9.3
+  iconsax:
+  pinput: ^6.0.1
 
 dev_dependencies:
   build_runner: ^2.4.15

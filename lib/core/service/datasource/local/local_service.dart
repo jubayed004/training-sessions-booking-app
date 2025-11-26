@@ -33,7 +33,7 @@ class LocalService {
 
   Future<String> getLanguage() async {
     final prefs = await _prefs;
-    return prefs.getString(LocalKeys.language) ?? "";
+    return prefs.getString(LocalKeys.languageKey) ?? "";
   }
 
   Future<bool> saveUserdata({
@@ -84,7 +84,7 @@ class LocalService {
   Future<bool> saveLanguage({required String value}) async {
     try {
       final prefs = await _prefs;
-      final success = await prefs.setString(LocalKeys.language, value);
+      final success = await prefs.setString(LocalKeys.languageKey, value);
       if (!success) AppLogger.log("Failed to save language", type: AppLogType.error);
       return success;
     } catch (e, stack) {
@@ -96,7 +96,7 @@ class LocalService {
   Future<bool> logOut() async {
     try {
       final prefs = await _prefs;
-      final lang = prefs.getString(LocalKeys.language) ?? "";
+      final lang = prefs.getString(LocalKeys.languageKey) ?? "";
       final cleared = await prefs.clear();
 
       if (!cleared) {
@@ -104,7 +104,7 @@ class LocalService {
         return false;
       }
 
-      final langSaved = await prefs.setString(LocalKeys.language, lang);
+      final langSaved = await prefs.setString(LocalKeys.languageKey, lang);
       if (!langSaved) AppLogger.log("Language not restored after logout", type: AppLogType.warning);
 
       AppLogger.log("User logged out successfully", type: AppLogType.success);

@@ -1,24 +1,112 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_trainer/core/router/route_path.dart';
-import 'package:my_trainer/features/splash/splash_screen.dart';
+import 'package:my_trainer/features/auth/active/active_otp_screen.dart';
+import 'package:my_trainer/features/auth/forget/forget_password_screen.dart';
+import 'package:my_trainer/features/auth/login/login_screen.dart';
+import 'package:my_trainer/features/auth/otp/otp_screen.dart';
+import 'package:my_trainer/features/auth/reset/reset_password_screen.dart';
+import 'package:my_trainer/features/auth/sign_up/sign_up_screen.dart';
+import 'package:my_trainer/features/auth/vendor_selection/vendor_selection_screen.dart';
+import 'package:my_trainer/features/user/nav/navigation_page.dart';
+import 'package:my_trainer/features/welcome/welcome_screen.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter initRoute = GoRouter(
-    initialLocation: RoutePath.splashScreen.addBasePath,
+    initialLocation: RoutePath.welcomeScreen.addBasePath,
     debugLogDiagnostics: true,
     navigatorKey: navigatorKey,
     routes: [
       ///======================= Initial Route =======================
       GoRoute(
-        name: RoutePath.splashScreen,
-        path: RoutePath.splashScreen.addBasePath,
+        name: RoutePath.welcomeScreen,
+        path: RoutePath.welcomeScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child: const SplashScreen(),
+            child: const WelcomeScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.vendorSelectionScreen,
+        path: RoutePath.vendorSelectionScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const VendorSelectionScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.loginScreen,
+        path: RoutePath.loginScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const LoginScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.signUpScreen,
+        path: RoutePath.signUpScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const SignUpScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.forgetPasswordScreen,
+        path: RoutePath.forgetPasswordScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const ForgetPasswordScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.otpScreen,
+        path: RoutePath.otpScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  OtpScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.resetPasswordScreen,
+        path: RoutePath.resetPasswordScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  ResetPasswordScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.activeOtpScreen,
+        path: RoutePath.activeOtpScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  ActiveOtpScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.navigationPage,
+        path: RoutePath.navigationPage.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  NavigationPage(),
             state: state,
           );
         },
