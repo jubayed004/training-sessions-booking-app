@@ -61,6 +61,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/verify.svg
   SvgGenImage get verify => const SvgGenImage('assets/icons/verify.svg');
 
+  /// File path: assets/icons/verifyed.svg
+  SvgGenImage get verifyed => const SvgGenImage('assets/icons/verifyed.svg');
+
   /// File path: assets/icons/wallet-money.svg
   SvgGenImage get walletMoney =>
       const SvgGenImage('assets/icons/wallet-money.svg');
@@ -81,6 +84,7 @@ class $AssetsIconsGen {
     profile2user,
     profile,
     verify,
+    verifyed,
     walletMoney,
   ];
 }

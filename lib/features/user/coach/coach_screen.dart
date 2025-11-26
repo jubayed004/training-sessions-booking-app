@@ -17,7 +17,7 @@ class CoachScreen extends StatelessWidget {
       body: SafeArea(child: SingleChildScrollView(
         child: Column(
           children: [
-            Text("Coach Screen")
+
           ],
         ),
       )),
