@@ -72,16 +72,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         text: AppStrings.getStarted.tr
                     ),
                    Gap(16),
-                   GestureDetector(
-                     onTap: ()=>AppRouter.route.pushNamed(RoutePath.loginScreen),
-                     child: Text(
-                       AppStrings.logIn.tr,
-                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                         color: isDarkMode ? Colors.white : AppColors.greenTextColor
-                       ),
+                  TextButton(
+                    onPressed: ()=>AppRouter.route.pushNamed(RoutePath.loginScreen),
+                    child:Text( AppStrings.logIn.tr,),
                      ),
-                   ),
-          
                   ],
                 ),
               ],

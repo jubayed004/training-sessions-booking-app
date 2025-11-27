@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
+import 'package:my_trainer/utils/extension/base_extension.dart';
 
 class CustomDropdownField<T> extends StatelessWidget {
   final String hintText;
@@ -62,20 +63,12 @@ class CustomDropdownField<T> extends StatelessWidget {
         value: item,
         child: Text(
           labelBuilder?.call(item) ?? item.toString(),
-          style: const TextStyle(
-            color: AppColors.primaryColor,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
+          style: context.bodyMedium,
         ),
       )).toList(),
       onChanged: enabled ? onChanged : null,
       validator: validationFunction,
-      style: const TextStyle(
-        color: AppColors.primaryColor,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
+      style: context.bodyMedium,
       buttonStyleData: const ButtonStyleData(
         padding: EdgeInsets.only(right: 8),
       ),

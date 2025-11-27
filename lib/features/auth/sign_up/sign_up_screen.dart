@@ -14,9 +14,14 @@ import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;

@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Greeting
+            ///============== Greeting ==================
             CustomAlignText(
               text: "Hello, Alex!",
               style: GoogleFonts.montserrat(
@@ -41,18 +41,18 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Gap(16),
-            /// Book a session card
+            /// ================ Book a session card =================
             CustomSessionCard(
               title: AppStrings.newSession.tr,
               description: AppStrings.easilySelectTime.tr,
               buttonText: AppStrings.bookASession.tr,
-              imagePath: 'assets/images/home_book_a_session.png',
+              imagePath: 'assets/images/home_session.png',
               onButtonPressed: () {
                 print('Book a Session Pressed');
               },
             ),
             Gap(24),
-            /// Upcoming Sessions Title
+            /// ================= Upcoming Sessions Title =================
             CustomAlignText(
               text: AppStrings.upcomingSessions.tr,
               style: GoogleFonts.montserrat(
@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
               mainActivity: 'Yoga',
               dateTime: '21-10-2025 7:00 p.m',
               location: 'e.g. B. Berlin or “Peak Fit...”',
-              statusText: 'canceled',
+              statusText: 'Confirmed',
               onReschedulePressed: () {
                 print('Confirmed Reschedule Pressed');
               },
@@ -95,7 +95,6 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             Gap(24),
-
             CustomAlignText(
               text: AppStrings.latestActivities.tr,
               style: GoogleFonts.montserrat(
@@ -110,13 +109,15 @@ class HomeScreen extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 10,
+              itemCount: 6,
               itemBuilder: (_, index) {
                 return NotificationItem(
                   status: 'message',
                   title: 'Session with James K. completed',
                   subtitle: 'YESTERDAY, 6:30 A.M',
-                  onTap: () {},
+                  onTap: () {
+
+                  },
                 );
               },
             ),

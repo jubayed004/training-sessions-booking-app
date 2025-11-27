@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -17,7 +19,11 @@ void main() async{
 
   Map<String, Map<String, String>>? languages = await LanguageController.getLanguages();
 
-  runApp(MyApp(languages: languages));
+  runApp( DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => MyApp(languages: languages), // Wrap your app
+  ),);
+
 }
 
 class MyApp extends StatelessWidget {
