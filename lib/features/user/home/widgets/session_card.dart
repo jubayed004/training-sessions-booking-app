@@ -5,12 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart';
+import 'package:my_trainer/share/widgets/network_image/custom_network_image.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
-
-// We remove the SessionStatus enum and use a String instead.
-
 class SessionCard extends StatelessWidget {
   final String name;
   final int age;
@@ -19,9 +17,9 @@ class SessionCard extends StatelessWidget {
 
   final String dateTime;
   final String location;
-  final String statusText; // <-- Now a simple String for dynamic status from server
+  final String statusText;
   final VoidCallback onReschedulePressed;
-  final VoidCallback? onCancelPressed; // Optional for confirmed state
+  final VoidCallback? onCancelPressed;
 
   const SessionCard({
     super.key,
@@ -32,9 +30,9 @@ class SessionCard extends StatelessWidget {
 
     required this.dateTime,
     required this.location,
-    required this.statusText, // Make it required
+    required this.statusText,
     required this.onReschedulePressed,
-    this.onCancelPressed, // Optional
+    this.onCancelPressed,
   });
 
   Map<String, Color> _getBadgeColors(String status) {
@@ -42,22 +40,22 @@ class SessionCard extends StatelessWidget {
     if (statusLower == 'canceled') {
       return {
         'background': const Color(0xFFFFEBEE),
-        'text': const Color(0xFFE94E6C) // Your accent color/red
+        'text': const Color(0xFFE94E6C)
       };
     } else if (statusLower == 'confirmed') {
       return {
-        'background': const Color(0xFFE0F7FA), // Light cyan
-        'text': const Color(0xFF00ACC1) // Blue-green
+        'background': const Color(0xFFE0F7FA),
+        'text': const Color(0xFF00ACC1)
       };
-    } else if (statusLower == 'completed') { // Handle the new 'Completed' state
+    } else if (statusLower == 'completed') {
       return {
-        'background': const Color(0xFFE8F5E9), // Light green
-        'text': const Color(0xFF43A047) // Darker green
+        'background': const Color(0xFFE8F5E9),
+        'text': const Color(0xFF43A047)
       };
     } else {
       return {
-        'background': const Color(0xFFFFFDE7), // Light yellow
-        'text': const Color(0xFFFFB300) // Amber
+        'background': const Color(0xFFFFFDE7),
+        'text': const Color(0xFFFFB300)
       };
     }
   }
@@ -101,16 +99,12 @@ class SessionCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 65.r,
-                height: 65.r,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/upcomeingsessionimage.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              CustomNetworkImage(
+                  width: 65.r,
+                  height: 65.r,
+                  imageUrl:'https://fitnglam.ae/wp-content/uploads/2022/05/unsplash_HHXdPG_eTIQ-1-1.png',
+                borderRadius: BorderRadius.circular(12.r),
+                fit: BoxFit.cover,
               ),
               Gap(12.w),
               Expanded(
@@ -126,18 +120,13 @@ class SessionCard extends StatelessWidget {
                           children: [
                             Text(
                               '$name, $age',
-                              style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 14.sp,
-                                color: primaryColor,
-                              ),
+                              style: context.titleMedium,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            Assets.icons.verifyed.svg(width: 16)
+                            Assets.icons.verifyed.svg(width: 16.w)
                           ],
                         ),
                         Gap(8.w),
-                        // Status Badge
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                           decoration: BoxDecoration(
@@ -145,7 +134,7 @@ class SessionCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16.r),
                           ),
                           child: Text(
-                            statusText.tr, // Use .tr for dynamic translation
+                            statusText.tr,
                             style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w600,
                               fontSize: 12.sp,
@@ -156,11 +145,9 @@ class SessionCard extends StatelessWidget {
                       ],
                     ),
                     Gap(4.h),
-                    // Rating and Activities Row
                     Row(
                       spacing: 6,
                       children: [
-                        // Rating Chip
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                           decoration: BoxDecoration(
@@ -235,7 +222,6 @@ class SessionCard extends StatelessWidget {
                 size: 18.r,
                 color: context.iconColor,
               ),
-
               Flexible(
                 child: Text(
                   location.tr,
@@ -269,7 +255,6 @@ class SessionCard extends StatelessWidget {
                       ),
                       child: const Text('Cancel'),
                     )
-
                   ),
                 if (onCancelPressed != null) Gap(16.w),
                 Expanded(

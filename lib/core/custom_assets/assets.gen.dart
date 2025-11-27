@@ -39,6 +39,9 @@ class $AssetsIconsGen {
   SvgGenImage get documentDownload =>
       const SvgGenImage('assets/icons/document-download.svg');
 
+  /// File path: assets/icons/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
+
   /// File path: assets/icons/h.svg
   SvgGenImage get h => const SvgGenImage('assets/icons/h.svg');
 
@@ -77,6 +80,7 @@ class $AssetsIconsGen {
     calendar,
     camera,
     documentDownload,
+    filter,
     h,
     home,
     messages2,
@@ -102,6 +106,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/home_book_a_session.png
   AssetGenImage get homeBookASession =>
       const AssetGenImage('assets/images/home_book_a_session.png');
+
+  /// File path: assets/images/home_session.png
+  AssetGenImage get homeSession =>
+      const AssetGenImage('assets/images/home_session.png');
 
   /// File path: assets/images/loginimage.png
   AssetGenImage get loginimage =>
@@ -130,6 +138,7 @@ class $AssetsImagesGen {
     onlineSupport,
     home2,
     homeBookASession,
+    homeSession,
     loginimage,
     upcomeingsessionimage,
     v,

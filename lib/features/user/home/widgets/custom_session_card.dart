@@ -26,8 +26,7 @@ class CustomSessionCard extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    double cardWidth = screenWidth * 0.9;
-    double cardHeight = screenHeight * 0.2+15;
+    double cardHeight = screenHeight * 0.2+10;
     return Container(
       width: screenWidth,
       height: cardHeight,
@@ -77,7 +76,7 @@ class CustomSessionCard extends StatelessWidget {
             ),
           ),
           Container(
-            width: screenWidth/2.8,
+            width: screenWidth/2.2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
