@@ -14,20 +14,11 @@ void showFilterModal(BuildContext context) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    enableDrag: true,
+    //enableDrag: true,
     backgroundColor: Colors.transparent,
+
     builder: (BuildContext context) {
-      return FractionallySizedBox(
-        heightFactor: 0.8,
-        child: Material(
-          color: AppColors.backgroundColor,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
-          ),
-          child: FilterModalContent(),
-        ),
-      );
+      return FilterModalContent();
     },
   );
 }
@@ -55,97 +46,120 @@ class _FilterModalContentState extends State<FilterModalContent> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Header with title and close button
-              Row(
-                children: [
-                  Text(
-                    AppStrings.filter.tr,
-                    style: context.textTheme.headlineSmall,
-                  ),
-                  Spacer(),
-                  IconButton(
-                    onPressed: () => AppRouter.route.pop(),
-                    icon: Icon(Iconsax.close_circle),
-                  ),
-                ],
+    return makeDismissable(
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.7,
+         minChildSize: 0.5,
+         maxChildSize: 1,
+         builder: (_,controller)=>Container(
+           decoration: BoxDecoration(
+               color: AppColors.white,
+               borderRadius: BorderRadiusGeometry.vertical(
+                   top: Radius.circular(20)
+               )
+           ),
+      
+           child: SingleChildScrollView(
+            controller: controller,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Header with title and close button
+                    Row(
+                      children: [
+                        Text(
+                          AppStrings.filter.tr,
+                          style: context.textTheme.headlineSmall,
+                        ),
+                        Spacer(),
+                        IconButton(
+                          onPressed: () => AppRouter.route.pop(),
+                          icon: Icon(Iconsax.close_circle),
+                        ),
+                      ],
+                    ),
+                    // Gap
+                    Gap(8),
+                    Text('Sort by', style: context.textTheme.bodyLarge),
+                    Gap(8),
+                    CustomDropdownField(
+                      value: "Most popular",
+                      onChanged: (v) {
+                        v = v;
+                      },
+                      hintText: "........",
+                      items: ['Most popular', 'Newest', 'Highest rated'],
+                    ),
+                    Gap(16),
+                    Text(AppStrings.price.tr, style: context.textTheme.bodyLarge),
+                    Gap(8),
+                    CustomDropdownField(
+                      value: "€50-75",
+                      onChanged: (v) {
+                        v = v;
+                      },
+                      hintText: "........",
+                      items: ['€50-75', '€100-175', '€150-275'],
+                    ),
+                    Gap(16),
+                    Text(AppStrings.experience.tr, style: context.textTheme.bodyLarge),
+                    Gap(8),
+                    CustomDropdownField(
+                      value: "0-6 month",
+                      onChanged: (v) {
+                        v = v;
+                      },
+                      hintText: "........",
+                      items: ['0-6 month', '1-2 years', '3-6 years'],
+                    ),
+                    Gap(16),
+                    CustomTextField(
+                      title: AppStrings.location.tr,
+                      controller: _locationController,
+                      hintText: AppStrings.enterYourCityAndZipCode.tr,
+                      keyboardType: TextInputType.streetAddress,
+                    ),
+                    Gap(16),
+                    Text(AppStrings.specifications.tr, style: context.textTheme.bodyLarge),
+                    // Tags wrap
+                    Wrap(
+                      spacing: 10.0, // Space between tags
+                      runSpacing: 10.0, // Space between lines
+                      children: tags.map((tag) {
+                        return TagItem(
+                          tag: tag,
+                          isSelected: selectedTags.contains(tag),
+                          onTap: () {
+                            setState(() {
+                              if (selectedTags.contains(tag)) {
+                                selectedTags.remove(tag);
+                              } else {
+                                selectedTags.add(tag);
+                              }
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
+                    SizedBox(height: 16),
+                    CustomButton(text: AppStrings.submit.tr,onTap: ()=>AppRouter.route.pop(),)
+                  ],
+                ),
               ),
-              // Gap
-              Gap(8),
-              Text('Sort by', style: context.textTheme.bodyLarge),
-              Gap(8),
-              CustomDropdownField(
-                value: "Most popular",
-                onChanged: (v) {
-                  v = v;
-                },
-                hintText: "........",
-                items: ['Most popular', 'Newest', 'Highest rated'],
-              ),
-              Gap(16),
-              Text(AppStrings.price.tr, style: context.textTheme.bodyLarge),
-              Gap(8),
-              CustomDropdownField(
-                value: "€50-75",
-                onChanged: (v) {
-                  v = v;
-                },
-                hintText: "........",
-                items: ['€50-75', '€100-175', '€150-275'],
-              ),
-              Gap(16),
-              Text(AppStrings.experience.tr, style: context.textTheme.bodyLarge),
-              Gap(8),
-              CustomDropdownField(
-                value: "0-6 month",
-                onChanged: (v) {
-                  v = v;
-                },
-                hintText: "........",
-                items: ['0-6 month', '1-2 years', '3-6 years'],
-              ),
-              Gap(16),
-              CustomTextField(
-                title: AppStrings.location.tr,
-                controller: _locationController,
-                hintText: AppStrings.enterYourCityAndZipCode.tr,
-                keyboardType: TextInputType.streetAddress,
-              ),
-              Gap(16),
-              Text(AppStrings.specifications.tr, style: context.textTheme.bodyLarge),
-              // Tags wrap
-              Wrap(
-                spacing: 10.0, // Space between tags
-                runSpacing: 10.0, // Space between lines
-                children: tags.map((tag) {
-                  return TagItem(
-                    tag: tag,
-                    isSelected: selectedTags.contains(tag),
-                    onTap: () {
-                      setState(() {
-                        if (selectedTags.contains(tag)) {
-                          selectedTags.remove(tag);
-                        } else {
-                          selectedTags.add(tag);
-                        }
-                      });
-                    },
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 16),
-              CustomButton(text: AppStrings.submit.tr,onTap: ()=>AppRouter.route.pop(),)
-            ],
-          ),
-        ),
+            ),
+                 ),
+         ),
       ),
     );
   }
 }
+
+Widget makeDismissable({required Widget child})=>GestureDetector(
+  behavior: HitTestBehavior.opaque,
+  onTap: ()=>AppRouter.route.pop(),
+  child: GestureDetector(onTap: (){},child: child,),
+);

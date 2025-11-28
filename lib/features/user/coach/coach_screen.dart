@@ -97,7 +97,8 @@ class _CoachScreenState extends State<CoachScreen> {
                           ),
                         ),
                         const Gap(16),
-                        InkWell(
+                        GestureDetector(
+                          behavior: HitTestBehavior.opaque,
                           onTap: () {
                             showFilterModal(context);
                           },
@@ -110,7 +111,8 @@ class _CoachScreenState extends State<CoachScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
+                        GestureDetector(
+                           behavior: HitTestBehavior.opaque,
                           onTap: (){},
                             child: Text("All coaches",style: context.textTheme.bodyLarge,)),
                         InkWell(
