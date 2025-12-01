@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
 class TextFieldValidator {
-
   static String? Function(String?) required({required String errorText}) {
     return (value) {
       final trimmed = value?.trim() ?? '';
@@ -73,10 +72,7 @@ class TextFieldValidator {
       final trimmed = value?.trim() ?? '';
       if (trimmed.isEmpty) return "Website URL is required";
 
-      final urlPattern = RegExp(
-        r'^(https?:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$',
-        caseSensitive: false,
-      );
+      final urlPattern = RegExp(r'^(https?:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/[^\s]*)?$', caseSensitive: false);
 
       if (!urlPattern.hasMatch(trimmed)) return "Enter a valid website URL";
       return null;
@@ -161,8 +157,47 @@ class TextFieldValidator {
       return null;
     };
   }
-}
 
+  static String? Function(String?) dateOfBirth() {
+    return (value) {
+      final trimmed = value?.trim() ?? '';
+      if (trimmed.isEmpty) return "Date of birth is required";
+
+      if (!RegExp(r'^(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[0-2])[-/](\d{4})$').hasMatch(trimmed)) {
+        return "Please enter a valid date of birth (DD/MM/YYYY)";
+      }
+
+      final dateParts = trimmed.split(RegExp(r'[-/ ]')); // Split date by separator
+      final day = int.tryParse(dateParts[0]);
+      final month = int.tryParse(dateParts[1]);
+      final year = int.tryParse(dateParts[2]);
+
+      if (day == null || month == null || year == null) return "Invalid date format";
+
+      try {
+        final date = DateTime(year, month, day);
+        if (date.isAfter(DateTime.now())) return "Date of birth cannot be in the future";
+      } catch (e) {
+        return "Invalid date of birth";
+      }
+
+      return null;
+    };
+  }
+
+  static String? Function(String?) gender() {
+    return (value) {
+      final trimmed = value?.trim() ?? '';
+      if (trimmed.isEmpty) return "Gender is required";
+
+      if (!['male', 'female', 'other'].contains(trimmed.toLowerCase())) {
+        return "Please select a valid gender (male, female, other)";
+      }
+
+      return null;
+    };
+  }
+}
 
 
 /*

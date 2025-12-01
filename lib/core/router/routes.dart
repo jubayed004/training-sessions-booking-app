@@ -8,7 +8,13 @@ import 'package:my_trainer/features/auth/otp/otp_screen.dart';
 import 'package:my_trainer/features/auth/reset/reset_password_screen.dart';
 import 'package:my_trainer/features/auth/sign_up/sign_up_screen.dart';
 import 'package:my_trainer/features/auth/vendor_selection/vendor_selection_screen.dart';
+import 'package:my_trainer/features/user/bookings/booking_confirmed_screen.dart';
 import 'package:my_trainer/features/user/nav/navigation_page.dart';
+import 'package:my_trainer/features/user/profile/personal_information_edit_screen.dart';
+import 'package:my_trainer/features/user/profile/personal_information_screen.dart';
+import 'package:my_trainer/features/other/change_password_screen.dart';
+import 'package:my_trainer/features/other/password_and_security_screen.dart';
+import 'package:my_trainer/features/user/push_notifications/push_notification_screen.dart';
 import 'package:my_trainer/features/welcome/welcome_screen.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
 
@@ -107,6 +113,68 @@ class AppRouter {
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
             child:  NavigationPage(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.bookingConfirmationScreen,
+        path: RoutePath.bookingConfirmationScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  BookingConfirmationScreen(),
+            state: state,
+          );
+        },
+      ),
+      //=================Profile ===================
+      GoRoute(
+        name: RoutePath.personalInformationScreen,
+        path: RoutePath.personalInformationScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  PersonalInformationScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.personalInformationEditScreen,
+        path: RoutePath.personalInformationEditScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  PersonalInformationEditScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.pushNotificationScreen,
+        path: RoutePath.pushNotificationScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  PushNotificationScreen(),
+            state: state,
+          );
+        },
+      ),
+  //=============Setting==========
+      GoRoute(
+        name: RoutePath.passwordAndSecurityScreen,
+        path: RoutePath.passwordAndSecurityScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  PasswordAndSecurityScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.changePasswordScreen,
+        path: RoutePath.changePasswordScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  ChangePasswordScreen(),
             state: state,
           );
         },

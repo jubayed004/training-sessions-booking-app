@@ -14,9 +14,7 @@ void showFilterModal(BuildContext context) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    //enableDrag: true,
     backgroundColor: Colors.transparent,
-
     builder: (BuildContext context) {
       return FilterModalContent();
     },
