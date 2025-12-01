@@ -8,7 +8,15 @@ import 'package:my_trainer/features/auth/otp/otp_screen.dart';
 import 'package:my_trainer/features/auth/reset/reset_password_screen.dart';
 import 'package:my_trainer/features/auth/sign_up/sign_up_screen.dart';
 import 'package:my_trainer/features/auth/vendor_selection/vendor_selection_screen.dart';
+import 'package:my_trainer/features/other/about_us_screen.dart';
+import 'package:my_trainer/features/other/code_of_conduct_screen.dart';
+import 'package:my_trainer/features/other/contact_screen.dart';
+import 'package:my_trainer/features/other/imprint_screen.dart';
+import 'package:my_trainer/features/other/privacy_policy_screen.dart';
+import 'package:my_trainer/features/other/terms_and_conditions_screen.dart';
 import 'package:my_trainer/features/user/bookings/booking_confirmed_screen.dart';
+import 'package:my_trainer/features/user/favorite_trainer/favorite_trainer_screen.dart';
+import 'package:my_trainer/features/user/inbox/inbox_screen.dart';
 import 'package:my_trainer/features/user/nav/navigation_page.dart';
 import 'package:my_trainer/features/user/profile/personal_information_edit_screen.dart';
 import 'package:my_trainer/features/user/profile/personal_information_screen.dart';
@@ -179,6 +187,86 @@ class AppRouter {
           );
         },
       ),
+      GoRoute(
+        name: RoutePath.codeOfConductScreen,
+        path: RoutePath.codeOfConductScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  CodeOfConductScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.aboutUsScreen,
+        path: RoutePath.aboutUsScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  AboutUsScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.contactScreen,
+        path: RoutePath.contactScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  ContactScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.privacyPolicyScreen,
+        path: RoutePath.privacyPolicyScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  PrivacyPolicyScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.termsAndConditionsScreen,
+        path: RoutePath.termsAndConditionsScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  TermsAndConditionsScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.imprintScreen,
+        path: RoutePath.imprintScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  ImprintScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.favoriteTrainerScreen,
+        path: RoutePath.favoriteTrainerScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  FavoriteTrainerScreen(),
+            state: state,
+          );
+        },
+      ),
+   /*   GoRoute(
+        name: RoutePath.chatListScreen,
+        path: RoutePath.chatListScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  ChatListScreen(),
+            state: state,
+          );
+        },
+      ),*/
 
       /*GoRoute(
         name: RoutePath.categoryEventsScreen,

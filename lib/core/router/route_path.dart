@@ -17,5 +17,14 @@ class RoutePath {
   static const String pushNotificationScreen = 'pushNotificationScreen';
   static const String passwordAndSecurityScreen = 'passwordAndSecurityScreen';
   static const String changePasswordScreen = 'changePasswordScreen';
+  static const String termsAndConditionsScreen = 'termsAndConditionsScreen';
+  static const String privacyPolicyScreen = 'privacyPolicyScreen';
+  static const String contactScreen = 'contactScreen';
+  static const String codeOfConductScreen = 'codeOfConductScreen';
+  static const String aboutUsScreen = 'aboutUsScreen';
+  static const String imprintScreen = 'imprintScreen';
+  static const String favoriteTrainerScreen = 'favoriteTrainerScreen';
+  static const String chatListScreen = 'chatListScreen';
+
 
 }

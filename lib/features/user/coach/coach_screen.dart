@@ -58,8 +58,7 @@ _searchController.dispose();
     ];
     return Scaffold(
       appBar: AppBar(
-        scrolledUnderElevation: 0
-        ,
+        scrolledUnderElevation: 0,
         title: Text(
           "mytrainerr.".tr,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(

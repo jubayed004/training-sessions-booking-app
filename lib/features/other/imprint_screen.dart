@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:my_trainer/features/other/controller/other_controller.dart';
 import 'package:my_trainer/share/widgets/loading/loading_widget.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/enum/app_enum.dart';
 
-class ContactScreen extends StatefulWidget {
-  const ContactScreen({super.key});
+class ImprintScreen extends StatefulWidget {
+  const ImprintScreen({super.key});
 
   @override
-  State<ContactScreen> createState() => _ContactScreenState();
+  State<ImprintScreen> createState() => _ImprintScreenState();
 }
 
-class _ContactScreenState extends State<ContactScreen> {
+class _ImprintScreenState extends State<ImprintScreen> {
   final controller = Get.find<OtherController>();
 
   @override
@@ -29,7 +30,7 @@ class _ContactScreenState extends State<ContactScreen> {
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          AppStrings.contact.tr,
+          AppStrings.imprint.tr,
         ),
         centerTitle: true,
       ),
