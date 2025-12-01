@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/router/route_path.dart';
 import 'package:my_trainer/core/router/routes.dart';
+import 'package:my_trainer/features/user/bookings/widgets/reschedule_modal_bottom_sheet.dart';
 import 'package:my_trainer/features/user/profile/widgets/profile_menu_item.dart';
 import 'package:my_trainer/features/user/profile/widgets/profile_section_title.dart';
 import 'package:my_trainer/features/user/profile/widgets/profile_social_link.dart';
@@ -64,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
               ProfileSectionTitle(title: AppStrings.accountSection.tr),
               Gap(12.h),
               ProfileMenuItem(title: AppStrings.personalInformation.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.personalInformationScreen)),
-              ProfileMenuItem(title: AppStrings.favoriteTrainer.tr, onTap: () {}),
+              ProfileMenuItem(title: AppStrings.favoriteTrainer.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.favoriteTrainerScreen)),
               ProfileMenuItem(title: "My Trainer".tr, onTap: () {}, isLast: true),
               Gap(24.h),
                ProfileSectionTitle(title: 'SETTINGS SECTION'.tr),
@@ -74,14 +75,24 @@ class ProfileScreen extends StatelessWidget {
               Gap(24.h),
                ProfileSectionTitle(title: AppStrings.supportAndLegalSection.tr),
               Gap(12.h),
-              ProfileMenuItem(title: AppStrings.aboutUs.tr, onTap: () {}),
-              ProfileMenuItem(title: AppStrings.contact.tr, onTap: () {}),
-              ProfileMenuItem(title: AppStrings.termsOfUse.tr, onTap: () {}),
-              ProfileMenuItem(title: AppStrings.privacyPolicy.tr, onTap: () {}),
-              ProfileMenuItem(title: AppStrings.imprint.tr, onTap: () {}),
-              ProfileMenuItem(title: AppStrings.codeOfConduct.tr, onTap: () {}, isLast: true),
+              ProfileMenuItem(title: AppStrings.aboutUs.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.aboutUsScreen)),
+              ProfileMenuItem(title: AppStrings.contact.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.contactScreen)),
+              ProfileMenuItem(title: AppStrings.termsOfUse.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.termsAndConditionsScreen)),
+              ProfileMenuItem(title: AppStrings.privacyPolicy.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.privacyPolicyScreen)),
+              ProfileMenuItem(title: AppStrings.imprint.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.imprintScreen)),
+              ProfileMenuItem(title: AppStrings.codeOfConduct.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.codeOfConductScreen), isLast: true),
               Gap(24.h),
-              CustomButton(text: AppStrings.logOut.tr,),
+              CustomButton(text: AppStrings.logOut.tr,onTap: (){
+                showRescheduleModal(
+                  context,
+                  title: 'Hey!'.tr,
+                  message: 'Are you sure you want to Logout your account?'.tr,
+                  confirmButtonText: AppStrings.logOut.tr,
+                  onConfirm: () {
+
+                  },
+                );
+              },),
               Gap(24.h),
               ProfileSectionTitle(title: 'SOCIAL LINK'.tr),
               Gap(12.h),

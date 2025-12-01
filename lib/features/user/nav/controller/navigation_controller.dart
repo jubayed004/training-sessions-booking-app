@@ -5,6 +5,7 @@ import 'package:my_trainer/features/user/bookings/bookings_screen.dart';
 import 'package:my_trainer/features/user/chat/chat_screen.dart';
 import 'package:my_trainer/features/user/coach/coach_screen.dart';
 import 'package:my_trainer/features/user/home/home_screen.dart';
+import 'package:my_trainer/features/user/inbox/inbox_screen.dart';
 import 'package:my_trainer/features/user/profile/profile_screen.dart';
 
 class NavigationController extends GetxController {
@@ -14,7 +15,7 @@ class NavigationController extends GetxController {
       HomeScreen(),
       CoachScreen(),
       BookingsScreen(),
-      ChatScreen(),
+      ChatListScreen(),
       ProfileScreen(),
     ];
   }
