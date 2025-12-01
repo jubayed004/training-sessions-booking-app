@@ -123,19 +123,11 @@ class RemainingSessionsCard extends StatelessWidget {
           Gap(16.w),
           GestureDetector(
             onTap: onChatPressed,
-            child: Container(
-              width: 50.r,
-              height: 50.r,
-              decoration: BoxDecoration(
-                color: AppColors.grayTertiaryTextColor,
-                shape: BoxShape.circle,
-              ),
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: AppColors.tertiaryTextColor,
               child: Center(
-                child: Icon(
-                  Iconsax.message,
-                  size: 24.r,
-                  color: secondaryTextColor,
-                ),
+                child:   Assets.icons.messages.svg(colorFilter: ColorFilter.mode(AppColors.white,BlendMode.srcIn )),
               ),
             ),
           ),

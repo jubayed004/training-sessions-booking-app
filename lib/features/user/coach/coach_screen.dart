@@ -17,6 +17,11 @@ class CoachScreen extends StatefulWidget {
 
 class _CoachScreenState extends State<CoachScreen> {
   final _searchController = TextEditingController();
+  @override
+  void dispose() {
+_searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -49,6 +49,7 @@ class _NavigationPageState extends State<NavigationPage> {
             _controller.icons.length,
                 (index) => Expanded(
               child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
                 onTap: () {
 
                   _controller.selectedNavIndex.value = index;
@@ -107,14 +108,12 @@ class _NavigationPageState extends State<NavigationPage> {
 
                       if (!isSelected)
                         Padding(
-                          padding: EdgeInsets.only(top: 4.w), // Default space for unselected text
+                          padding: EdgeInsets.only(top: 4.w),
                           child: Text(
                             _controller.labels[index],
                             style: context.labelSmall,
                           ),
                         ),
-
-
                     ],
                   );
                 }),

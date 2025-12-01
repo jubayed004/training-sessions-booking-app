@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart'; // Assumed to provide .svg assets
+import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
 import 'package:my_trainer/share/widgets/network_image/custom_network_image.dart'; // Assuming this component exists
@@ -18,10 +19,11 @@ class SessionCardWidgets extends StatelessWidget {
   final int moreActivitiesCount;
   final String dateTime;
   final String location;
-  final String statusText; // Must be 'confirmed', 'canceled', or 'completed'
+  final String statusText;
+  final String? outlinedButtonText;
   final VoidCallback onReschedulePressed;
   final VoidCallback? onCancelPressed;
-  final VoidCallback? onReviewPressed; // Added for 'Completed' status
+  final VoidCallback? onReviewPressed;
 
   const SessionCardWidgets({
     super.key,
@@ -37,6 +39,7 @@ class SessionCardWidgets extends StatelessWidget {
     required this.onReschedulePressed,
     this.onCancelPressed,
     this.onReviewPressed,
+   this.outlinedButtonText,
   });
 
   Map<String, Color> _getBadgeColors(String status) {
@@ -164,7 +167,7 @@ class SessionCardWidgets extends StatelessWidget {
                           children: [
                             Text(
                               rating.toStringAsFixed(1),
-                              style: context.labelMedium?.copyWith(
+                              style: context.labelMedium.copyWith(
                                 fontWeight: FontWeight.w700,
                                 color: primaryColor,
                               ),
@@ -284,7 +287,7 @@ class SessionCardWidgets extends StatelessWidget {
                         backgroundColor: WidgetStateProperty.all(isDarkMode ? AppColors.blackMainTextColor : Colors.grey.shade100),
                         minimumSize: WidgetStateProperty.all(Size(double.infinity, 48.h)),
                       ),
-                      child: Text('Cancel'.tr),
+                      child: Text(outlinedButtonText ?? AppStrings.cancel.tr),
                     ),
                   ),
                 if (onCancelPressed != null) Gap(16.w),
