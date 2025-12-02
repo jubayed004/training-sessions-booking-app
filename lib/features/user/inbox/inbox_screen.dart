@@ -28,18 +28,13 @@ class _ChatListScreenState extends State<ChatListScreen> {
   }
   @override
   Widget build(BuildContext context) {
-
-
-    // Mock Data mimicking the look of the inbox screenshot
     final mockChats = [
       {'name': 'Ann Smith', 'message': 'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.', 'time': '2:34 p.m', 'isUnread': true, 'imageUrl': 'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg'},
       {'name': 'Ann Smith', 'message': 'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.', 'time': '2:34 p.m', 'isUnread': true, 'imageUrl': 'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg'},
       {'name': 'Ann Smith', 'message': 'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.', 'time': '2:34 p.m', 'isUnread': false, 'imageUrl': 'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg'},
       {'name': 'Ann Smith', 'message': 'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.', 'time': '2:34 p.m', 'isUnread': false, 'imageUrl': 'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg'},
     ];
-
     return Scaffold(
-
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: Text(
@@ -51,7 +46,6 @@ class _ChatListScreenState extends State<ChatListScreen> {
         ),
       ),
       // ----------------------------------------------------
-
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 0.h),
         child: Column(
@@ -187,7 +181,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                   ),
                 ),
               );
-            }).toList(),
+            }),
             // ----------------------------------------------------
           ],
         ),

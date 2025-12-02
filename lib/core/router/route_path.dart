@@ -25,6 +25,7 @@ class RoutePath {
   static const String imprintScreen = 'imprintScreen';
   static const String favoriteTrainerScreen = 'favoriteTrainerScreen';
   static const String chatListScreen = 'chatListScreen';
+  static const String trainerDetailsScreen = 'trainerDetailsScreen';
 
 
 }
