@@ -4,6 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart';
+import 'package:my_trainer/core/router/route_path.dart';
+import 'package:my_trainer/core/router/routes.dart';
 import 'package:my_trainer/features/user/coach/widgets/coach_card.dart';
 import 'package:my_trainer/features/user/coach/widgets/filter_buttom_shit.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
@@ -143,10 +145,10 @@ _searchController.dispose();
                       location: coach['location'],
                       skills: coach['skills'],
                       image: coach['image'],
-                      onProfilePressed: () {  },
+                      onProfilePressed: ()=>AppRouter.route.pushNamed(RoutePath.trainerDetailsScreen),
                     );
                   },
-                  childCount: coaches.length, // number of static coaches
+                  childCount: coaches.length,
                 ),
               ),
             ],

@@ -23,6 +23,7 @@ import 'package:my_trainer/features/user/profile/personal_information_screen.dar
 import 'package:my_trainer/features/other/change_password_screen.dart';
 import 'package:my_trainer/features/other/password_and_security_screen.dart';
 import 'package:my_trainer/features/user/push_notifications/push_notification_screen.dart';
+import 'package:my_trainer/features/user/trainer_details/trainer_details_screen.dart';
 import 'package:my_trainer/features/welcome/welcome_screen.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
 
@@ -253,6 +254,16 @@ class AppRouter {
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
             child:  FavoriteTrainerScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.trainerDetailsScreen,
+        path: RoutePath.trainerDetailsScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  TrainerDetailsScreen(),
             state: state,
           );
         },
