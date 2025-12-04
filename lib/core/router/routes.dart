@@ -2,18 +2,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_trainer/core/router/route_path.dart';
 import 'package:my_trainer/features/auth/active/active_otp_screen.dart';
+import 'package:my_trainer/features/auth/certification_and_organic/certification_and_organic_screen.dart';
+import 'package:my_trainer/features/auth/expertise_and_specialization/expertise_and_specialization_screen.dart';
 import 'package:my_trainer/features/auth/forget/forget_password_screen.dart';
 import 'package:my_trainer/features/auth/login/login_screen.dart';
 import 'package:my_trainer/features/auth/otp/otp_screen.dart';
 import 'package:my_trainer/features/auth/reset/reset_password_screen.dart';
 import 'package:my_trainer/features/auth/sign_up/sign_up_screen.dart';
+import 'package:my_trainer/features/auth/trainer_sign_up/trainer_sign_up_screen.dart';
+import 'package:my_trainer/features/auth/training_location/training_location_screen.dart';
 import 'package:my_trainer/features/auth/vendor_selection/vendor_selection_screen.dart';
+import 'package:my_trainer/features/auth/verify_identity/verify_identity_screen.dart';
+import 'package:my_trainer/features/auth/verify_identity/verifyed_screen.dart';
 import 'package:my_trainer/features/other/about_us_screen.dart';
 import 'package:my_trainer/features/other/code_of_conduct_screen.dart';
 import 'package:my_trainer/features/other/contact_screen.dart';
 import 'package:my_trainer/features/other/imprint_screen.dart';
 import 'package:my_trainer/features/other/privacy_policy_screen.dart';
 import 'package:my_trainer/features/other/terms_and_conditions_screen.dart';
+import 'package:my_trainer/features/trainers/connected__account/connected_account_screen.dart';
+import 'package:my_trainer/features/trainers/earnings/earnings_screen.dart';
+import 'package:my_trainer/features/trainers/my_availability/my_availiability_screen.dart';
+import 'package:my_trainer/features/trainers/package_and_price/package_and_price_screen.dart';
+import 'package:my_trainer/features/trainers/trainer_information/trainer_information_screen.dart';
+import 'package:my_trainer/features/trainers/trainer_nav/trainer_nav_screen.dart';
 import 'package:my_trainer/features/user/bookings/booking_confirmed_screen.dart';
 import 'package:my_trainer/features/user/favorite_trainer/favorite_trainer_screen.dart';
 import 'package:my_trainer/features/user/inbox/inbox_screen.dart';
@@ -72,6 +84,67 @@ class AppRouter {
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
             child: const SignUpScreen(),
+            state: state,
+          );
+        },
+      ),
+      //==================== Trainer Sign Up ================
+      GoRoute(
+        name: RoutePath.trainerSignUpScreen,
+        path: RoutePath.trainerSignUpScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const TrainerSignUpScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.expertiseAndSpecializationScreen,
+        path: RoutePath.expertiseAndSpecializationScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const ExpertiseAndSpecializationScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.trainingLocationScreen,
+        path: RoutePath.trainingLocationScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const TrainingLocationScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.certificationAndOrganicScreen,
+        path: RoutePath.certificationAndOrganicScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const CertificationAndOrganicScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.verifyIdentityScreen,
+        path: RoutePath.verifyIdentityScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const VerifyIdentityScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.verifyedScreen,
+        path: RoutePath.verifyedScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child: const VerifyedScreen(),
             state: state,
           );
         },
@@ -264,6 +337,66 @@ class AppRouter {
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
             child:  TrainerDetailsScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.trainerNavScreen,
+        path: RoutePath.trainerNavScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  TrainerNavScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.trainerInformationScreen,
+        path: RoutePath.trainerInformationScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  TrainerInformationScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.packageAndPriceScreen,
+        path: RoutePath.packageAndPriceScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  PackageAndPriceScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.myAvailiabilityScreen,
+        path: RoutePath.myAvailiabilityScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  MyAvailiabilityScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.connectedAccountScreen,
+        path: RoutePath.connectedAccountScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  ConnectedAccountScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.earningsScreen,
+        path: RoutePath.earningsScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  EarningsScreen(),
             state: state,
           );
         },

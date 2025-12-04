@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -14,23 +13,25 @@ import 'package:my_trainer/share/widgets/button/custom_button.dart';
 import 'package:my_trainer/share/widgets/network_image/custom_network_image.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
+import 'package:my_trainer/utils/extension/base_extension.dart';
 
-
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class AccountScreen extends StatelessWidget {
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Text(
-          "mytrainerr.".tr,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: AppColors.appbarTextColor,
-            letterSpacing: -0.5,
-          ),
+          "mytrainerr.",
+          style: context.headlineSmall.copyWith(color:  AppColors.appbarTextColor, letterSpacing: -0.5),
         ),
+
+
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -45,18 +46,18 @@ class ProfileScreen extends StatelessWidget {
                     CustomNetworkImage(
                       width: context.width/3,
                       height: context.height/7,
-                        imageUrl: "https://fitnglam.ae/wp-content/uploads/2022/05/unsplash_HHXdPG_eTIQ-1-1.png",
+                      imageUrl: "https://fitnglam.ae/wp-content/uploads/2022/05/unsplash_HHXdPG_eTIQ-1-1.png",
                       fit: BoxFit.cover,
                       borderRadius: BorderRadius.circular(20.r),
                     ),
                     Text(
                       'Alex Doe',
-                      style: context.textTheme.headlineSmall,
+                      style: context.headlineSmall,
                     ),
                     Gap(4.h),
                     Text(
                       'alex.doe@email.com',
-                      style:context.textTheme.bodySmall,
+                      style:context.bodySmall,
                     ),
                   ],
                 ),
@@ -65,15 +66,18 @@ class ProfileScreen extends StatelessWidget {
               ProfileSectionTitle(title: AppStrings.accountSection.tr),
               Gap(12.h),
               ProfileMenuItem(title: AppStrings.personalInformation.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.personalInformationScreen)),
-              ProfileMenuItem(title: AppStrings.favoriteTrainer.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.favoriteTrainerScreen)),
-              ProfileMenuItem(title: "My Trainer".tr, onTap: () {}, isLast: true),
+              ProfileMenuItem(title: "Trainer Information", onTap: ()=>AppRouter.route.pushNamed(RoutePath.trainerInformationScreen)),
+              ProfileMenuItem(title: "Package and Price", onTap: ()=>AppRouter.route.pushNamed(RoutePath.packageAndPriceScreen)),
+              ProfileMenuItem(title: "My Availability", onTap: ()=>AppRouter.route.pushNamed(RoutePath.myAvailiabilityScreen)),
+              ProfileMenuItem(title: "Connected Account", onTap: ()=>AppRouter.route.pushNamed(RoutePath.connectedAccountScreen)),
+              ProfileMenuItem(title: "Earnings".tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.earningsScreen), isLast: true),
               Gap(24.h),
-               ProfileSectionTitle(title: 'SETTINGS SECTION'.tr),
+              ProfileSectionTitle(title: 'SETTINGS SECTION'.tr),
               Gap(12.h),
               ProfileMenuItem(title: AppStrings.pushNotifications.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.pushNotificationScreen)),
               ProfileMenuItem(title: AppStrings.passwordAndSecurity.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.passwordAndSecurityScreen), isLast: true),
               Gap(24.h),
-               ProfileSectionTitle(title: AppStrings.supportAndLegalSection.tr),
+              ProfileSectionTitle(title: AppStrings.supportAndLegalSection.tr),
               Gap(12.h),
               ProfileMenuItem(title: AppStrings.aboutUs.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.aboutUsScreen)),
               ProfileMenuItem(title: AppStrings.contact.tr, onTap: ()=>AppRouter.route.pushNamed(RoutePath.contactScreen)),

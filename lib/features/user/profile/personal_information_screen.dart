@@ -12,7 +12,6 @@ class PersonalInformationScreen extends StatelessWidget {
   const PersonalInformationScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -33,8 +32,8 @@ class PersonalInformationScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomNetworkImage(
-                      width: context.width/2,
-                      height: context.height/5,
+                      width: context.width/3,
+                      height: context.height/7,
                       imageUrl: "https://fitnglam.ae/wp-content/uploads/2022/05/unsplash_HHXdPG_eTIQ-1-1.png",
                       fit: BoxFit.cover,
                       borderRadius: BorderRadius.circular(20.r),

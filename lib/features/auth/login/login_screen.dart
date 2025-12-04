@@ -7,6 +7,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart';
 import 'package:my_trainer/core/router/route_path.dart';
 import 'package:my_trainer/core/router/routes.dart';
+import 'package:my_trainer/features/auth/controller/auth_controller.dart';
 import 'package:my_trainer/helper/validator/text_field_validator.dart';
 import 'package:my_trainer/share/widgets/align/custom_align_text.dart';
 import 'package:my_trainer/share/widgets/button/custom_back_button.dart';
@@ -15,9 +16,15 @@ import 'package:my_trainer/share/widgets/text_field/custom_text_field.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -69,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.lock_outline),
                     isPassword: true,
                     validator: TextFieldValidator.password(),
-              
+
                   ),
                   Gap(14),
                   Row(
@@ -86,7 +93,9 @@ class LoginScreen extends StatelessWidget {
                   Gap(28),
                   CustomButton(
                     text: AppStrings.logIn.tr,
-                    onTap: ()=>AppRouter.route.goNamed(RoutePath.navigationPage),
+                    onTap: (){
+                      _authController.isUser.value== true? AppRouter.route.goNamed(RoutePath.navigationPage):AppRouter.route.goNamed(RoutePath.trainerNavScreen);
+                    }
                   ),
                   Gap(32),
                   Row(
@@ -148,10 +157,10 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-              
 
-              
-              
+
+
+
                 ],
               ),
             ),
