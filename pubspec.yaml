@@ -57,6 +57,7 @@ dependencies:
   dotted_border: ^3.1.0
   easy_date_timeline: ^2.0.9
   flutter_calenders: ^1.0.0
+  carousel_slider: ^5.1.1
 
 
 dev_dependencies:
