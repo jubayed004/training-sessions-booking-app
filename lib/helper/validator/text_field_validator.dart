@@ -137,6 +137,38 @@ class TextFieldValidator {
     };
   }
 
+  // City
+  static String? Function(String?) city() {
+    return (value) {
+      final trimmed = value?.trim() ?? '';
+      if (trimmed.isEmpty) return "City is required";
+      if (trimmed.length < 2) return "Enter a valid city name";
+      return null;
+    };
+  }
+
+  // Zipcode
+  static String? Function(String?) zipcode() {
+    return (value) {
+      final trimmed = value?.trim() ?? '';
+      if (trimmed.isEmpty) return "Zipcode is required";
+      if (!RegExp(r'^\d{4,10}$').hasMatch(trimmed)) {
+        return "Enter a valid zipcode";
+      }
+      return null;
+    };
+  }
+
+  // Country
+  static String? Function(String?) country() {
+    return (value) {
+      final trimmed = value?.trim() ?? '';
+      if (trimmed.isEmpty) return "Country is required";
+      if (trimmed.length < 2) return "Enter a valid country name";
+      return null;
+    };
+  }
+
   static String? Function(String?) description({int minLength = 10}) {
     return (value) {
       final trimmed = value?.trim() ?? '';

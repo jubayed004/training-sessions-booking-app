@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/share/model/language_model.dart';
+import 'package:my_trainer/utils/app_strings/app_strings.dart';
 
 class AppConfig {
 
@@ -16,6 +19,12 @@ class AppConfig {
   static List<LanguageModel> languages = [
     // LanguageModel(imageUrl: "", languageName: 'german'.tr, countryCode: 'DE', languageCode: 'de'),
     LanguageModel(imageUrl: "", languageName: 'english'.tr, countryCode: 'US', languageCode: 'en'),
+  ];
+
+  static final List<Map<String, dynamic>> factFastList = [
+    {"icon": Icon(Iconsax.location), "title": AppStrings.location, "subTitle": "Los Angeles, CA – Griffith Park Fields"},
+    {"icon": Icon(Iconsax.shop), "title": AppStrings.experience, "subTitle": "5 years"},
+    {"icon": Icon(Iconsax.verify), "title": AppStrings.certificate, "subTitle": "3", "eye": Icon(Iconsax.eye)},
   ];
 
 }

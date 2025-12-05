@@ -5,8 +5,10 @@ import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/context_extensions.dart';
 import 'package:my_trainer/core/router/route_path.dart';
 import 'package:my_trainer/core/router/routes.dart';
+import 'package:my_trainer/features/auth/controller/auth_controller.dart';
 import 'package:my_trainer/helper/validator/text_field_validator.dart';
 import 'package:my_trainer/share/widgets/button/custom_button.dart';
+import 'package:my_trainer/share/widgets/network_image/custom_network_image.dart';
 import 'package:my_trainer/share/widgets/text_field/custom_text_field.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 
@@ -26,6 +28,7 @@ class _PersonalInformationEditScreenState extends State<PersonalInformationEditS
   TextEditingController postalCodeController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _authController = Get.find<AuthController>();
   @override
   void dispose() {
     firstNameController.dispose();
@@ -61,6 +64,14 @@ class _PersonalInformationEditScreenState extends State<PersonalInformationEditS
                       key: _formKey,
                       child: Column(
                         children: [
+                          CustomNetworkImage(
+                            width: context.width/3,
+                            height: context.height/7,
+                            imageUrl: "https://fitnglam.ae/wp-content/uploads/2022/05/unsplash_HHXdPG_eTIQ-1-1.png",
+                            fit: BoxFit.cover,
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          Gap(16),
                           CustomTextField(
                             controller: firstNameController,
                             title: AppStrings.firstName.tr,
@@ -130,7 +141,11 @@ class _PersonalInformationEditScreenState extends State<PersonalInformationEditS
                 ),
                 CustomButton(
                     onTap: () {
-                      AppRouter.route.goNamed(RoutePath.navigationPage);
+                      if(_authController.isUser.value == true){
+                        AppRouter.route.goNamed(RoutePath.navigationPage);
+                      }else{
+                        AppRouter.route.goNamed(RoutePath.trainerNavScreen);
+                      }
                     },
                     text: "Save the Changes"
                 )

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   RxInt start = 30.obs;
   RxBool isResendEnabled = false.obs;
+  RxBool isUser = true.obs;
   Timer? _timer;
   @override
   void onInit() {

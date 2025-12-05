@@ -5,12 +5,21 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_trainer/core/router/route_path.dart';
 import 'package:my_trainer/core/router/routes.dart';
+import 'package:my_trainer/features/auth/controller/auth_controller.dart';
+import 'package:my_trainer/features/auth/trainer_sign_up/trainer_sign_up_screen.dart';
 import 'package:my_trainer/share/widgets/button/custom_button.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
 
-class VendorSelectionScreen extends StatelessWidget {
+class VendorSelectionScreen extends StatefulWidget {
   const VendorSelectionScreen({super.key});
+
+  @override
+  State<VendorSelectionScreen> createState() => _VendorSelectionScreenState();
+}
+
+class _VendorSelectionScreenState extends State<VendorSelectionScreen> {
+  final _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +78,18 @@ class VendorSelectionScreen extends StatelessWidget {
                     ),
                     Gap(32),
                     CustomButton(
-                        onTap: ()=>AppRouter.route.pushNamed(RoutePath.signUpScreen),
+                        onTap: (){
+                          _authController.isUser.value = true;
+                          AppRouter.route.pushNamed(RoutePath.signUpScreen);
+                        },
                         text: AppStrings.continueAsClient.tr
                     ),
                     Gap(16),
                     CustomButton(
-                        onTap: ()=>AppRouter.route.pushNamed(RoutePath.signUpScreen),
+                        onTap: (){
+                          _authController.isUser.value = false;
+                          AppRouter.route.pushNamed(RoutePath.trainerSignUpScreen);
+                        },
                         text: AppStrings.continueAsTrainer.tr
                     ),
 
