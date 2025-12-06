@@ -6,7 +6,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart';
+import 'package:my_trainer/core/router/route_path.dart';
+import 'package:my_trainer/core/router/routes.dart';
+import 'package:my_trainer/features/user/profile/widgets/profile_social_link.dart';
 import 'package:my_trainer/share/widgets/align/custom_align_text.dart';
+import 'package:my_trainer/share/widgets/button/custom_button.dart';
+import 'package:my_trainer/share/widgets/certificate_dialog/certificate_dialog.dart';
 import 'package:my_trainer/share/widgets/network_image/custom_network_image.dart';
 import 'package:my_trainer/share/widgets/see_more_text/see_more_text.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
@@ -97,7 +102,7 @@ class TrainerInformationScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
-                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), spreadRadius: 1, blurRadius: 8, offset: Offset(0, 3))],
+                   /* boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.1), spreadRadius: 1, blurRadius: 8, offset: Offset(0, 3))],*/
                   ),
                   child: ListTile(
                     leading: fact['icon'],
@@ -107,7 +112,18 @@ class TrainerInformationScreen extends StatelessWidget {
                         ? GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
-                              _showEyeDialog(context);
+                              showDialog(
+                                context: context,
+                                builder: (_) => CertificateDialog(
+                                  title: "Certificate",
+                                  items: [
+                                    "Fitness B License",
+                                    "Nutrition Coach",
+                                    "Fitness B License",
+                                  ],
+                                ),
+                              );
+
                             },
                             child: fact['eye'],
                           )
@@ -141,59 +157,113 @@ class TrainerInformationScreen extends StatelessWidget {
               Gap(24),
               CustomAlignText(
                 text: "Reviews (23)",
-                style: GoogleFonts.montserrat(fontWeight: FontWeight.w800, fontSize: 18.sp, color: AppColors.blackMainTextColor),
+                style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 18.sp,
+                  color: AppColors.blackMainTextColor,
+                ),
               ),
-              Gap(8),
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.backgroundsLinesColor,width: 1),
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.white
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          spacing: 16,
-                          crossAxisAlignment: CrossAxisAlignment.start ,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: CustomNetworkImage(
-                                   width: 50.w,
-                                  height: 50.h,
-                                  imageUrl: "https://ironbullstrength.com/cdn/shop/articles/Best_Workout_Plan_for_Gaining_Muscle.webp?v=1704212230"
+              Gap(12),
+
+              SizedBox(
+                height: 160.h, // fixed height for horizontal list
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  padding: EdgeInsets.only(right: 12),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 280.w, // NECESSARY for horizontal list
+                      margin: EdgeInsets.only(right: 12),
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.backgroundsLinesColor,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              Row(
+                                spacing: 12,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: CustomNetworkImage(
+                                      width: 45.w,
+                                      height: 45.h,
+                                      imageUrl:
+                                      "https://ironbullstrength.com/cdn/shop/articles/Best_Workout_Plan_for_Gaining_Muscle.webp?v=1704212230",
+                                    ),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Ann Smith",
+                                        style: GoogleFonts.montserrat(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 16.sp,
+                                          color: AppColors.blackMainTextColor,
+                                        ),
+                                      ),
+                                      Text(
+                                        "24-10-2025",
+                                        style: context.labelSmall,
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
+
+                              Row(
+                                children: [
+                                  Text('4.9', style: context.titleMedium),
+                                  Gap(4.w),
+                                  Icon(
+                                    Icons.star,
+                                    color: AppColors.orangeSecondaryAccentColor,
+                                    size: 20.r,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+
+                          Gap(10),
+
+                          Expanded(
+                            child: Text(
+                              "Lorem ipsum dolor sit amet consectetur. Felis et lacus ut egestas urna aliquam scelerisque pretium mauris.",
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: context.bodyMedium,
                             ),
-                           Column(
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children: [
-                               Text("Ann Smith",style:  GoogleFonts.montserrat(fontWeight: FontWeight.w800, fontSize: 18.sp, color: AppColors.blackMainTextColor),),
-                               Text("24-10-2025",style: context.labelSmall,),
-
-                             ],
-                           ),
-
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text('4.9', style: context.titleMedium),
-                            Gap(4.w),
-                            Icon(Icons.star, color: AppColors.orangeSecondaryAccentColor, size: 22.r),
-                          ],
-                        ),
-                      ],
-                    ),
-
-                  ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
-              )
+              ),
+              Gap(12),
+              TextButton(onPressed: (){}, child: Text("View all reviews",)),
+              Gap(12),
+              ProfileSocialLink(title: 'Instagram', icon: Iconsax.instagram),
+              ProfileSocialLink(title: 'Protfolio', icon: Iconsax.global),
+              ProfileSocialLink(title: 'LinkedIn', icon: Iconsax.link, isLast: false),
+              Gap(12),
+              CustomButton(text: AppStrings.edit.tr,onTap: ()=>AppRouter.route.pushNamed(RoutePath.editTrainerInformationScreen),)
+
             ],
           ),
         ),
@@ -201,23 +271,4 @@ class TrainerInformationScreen extends StatelessWidget {
     );
   }
 
-  void _showEyeDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Details"),
-          content: Text("You clicked on the eye icon. Here are more details!"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: Text("Close"),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }

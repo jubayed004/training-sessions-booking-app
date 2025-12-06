@@ -13,6 +13,7 @@ class AppColors {
   static const Color linesDarkColor = Color(0xFFCACACB);
 
   static const Color blackMainTextColor = Color(0xFF0F243E);
+  static const Color inactiveBackground = Color(0xFFBBBDC4);
   static const Color grayTextSecondaryColor = Color(0xFF7E8792);
   static const Color grayTertiaryTextColor = Color(0xFFA3A9B0);
   static const Color tertiaryTextColor = Color(0xFF939393);

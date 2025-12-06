@@ -24,6 +24,7 @@ import 'package:my_trainer/features/trainers/connected__account/connected_accoun
 import 'package:my_trainer/features/trainers/earnings/earnings_screen.dart';
 import 'package:my_trainer/features/trainers/my_availability/my_availiability_screen.dart';
 import 'package:my_trainer/features/trainers/package_and_price/package_and_price_screen.dart';
+import 'package:my_trainer/features/trainers/trainer_information/edit_trainer_information_screen.dart';
 import 'package:my_trainer/features/trainers/trainer_information/trainer_information_screen.dart';
 import 'package:my_trainer/features/trainers/trainer_nav/trainer_nav_screen.dart';
 import 'package:my_trainer/features/user/bookings/booking_confirmed_screen.dart';
@@ -397,6 +398,16 @@ class AppRouter {
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
             child:  EarningsScreen(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
+        name: RoutePath.editTrainerInformationScreen,
+        path: RoutePath.editTrainerInformationScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(
+            child:  EditTrainerInformationScreen(),
             state: state,
           );
         },

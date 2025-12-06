@@ -38,6 +38,7 @@ class RoutePath {
   static const String myAvailiabilityScreen = 'myAvailiabilityScreen';
   static const String connectedAccountScreen = 'connectedAccountScreen';
   static const String earningsScreen = 'earningsScreen';
+  static const String editTrainerInformationScreen = 'editTrainerInformationScreen';
 
 
 }
