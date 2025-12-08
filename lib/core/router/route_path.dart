@@ -7,9 +7,11 @@ class RoutePath {
   static const String loginScreen = 'loginScreen';
   static const String signUpScreen = 'signUpScreen';
   static const String trainerSignUpScreen = 'trainerSignUpScreen';
-  static const String expertiseAndSpecializationScreen = 'expertiseAndSpecializationScreen';
+  static const String expertiseAndSpecializationScreen =
+      'expertiseAndSpecializationScreen';
   static const String trainingLocationScreen = 'trainingLocationScreen';
-  static const String certificationAndOrganicScreen = 'certificationAndOrganicScreen';
+  static const String certificationAndOrganicScreen =
+      'certificationAndOrganicScreen';
   static const String verifyIdentityScreen = 'verifyIdentityScreen';
   static const String verifyedScreen = 'verifyedScreen';
   static const String forgetPasswordScreen = 'forgetPasswordScreen';
@@ -19,7 +21,8 @@ class RoutePath {
   static const String activeOtpScreen = 'activeOtpScreen';
   static const String bookingConfirmationScreen = 'bookingConfirmationScreen';
   static const String personalInformationScreen = 'personalInformationScreen';
-  static const String personalInformationEditScreen = 'personalInformationEditScreen';
+  static const String personalInformationEditScreen =
+      'personalInformationEditScreen';
   static const String pushNotificationScreen = 'pushNotificationScreen';
   static const String passwordAndSecurityScreen = 'passwordAndSecurityScreen';
   static const String changePasswordScreen = 'changePasswordScreen';
@@ -38,6 +41,9 @@ class RoutePath {
   static const String myAvailiabilityScreen = 'myAvailiabilityScreen';
   static const String connectedAccountScreen = 'connectedAccountScreen';
   static const String earningsScreen = 'earningsScreen';
-
-
+  static const String editTrainerInformationScreen =
+      'editTrainerInformationScreen';
+  static const String chatScreen = 'chatScreen';
+  static const String reviewScreen = 'reviewScreen';
+  static const String bookingNowScreen = 'bookingNowScreen';
 }

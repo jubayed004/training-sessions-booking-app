@@ -21,8 +21,8 @@ void main() async{
 
   runApp( DevicePreview(
     enabled: !kReleaseMode,
-    builder: (context) => MyApp(languages: languages), // Wrap your app
-  ),);
+    builder: (context) => MyApp(languages: languages),),
+  );
 
 }
 

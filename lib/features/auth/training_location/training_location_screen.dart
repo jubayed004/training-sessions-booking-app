@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/router/route_path.dart';
 import 'package:my_trainer/core/router/routes.dart';
 import 'package:my_trainer/features/auth/widgets/up_progress_bar.dart';
@@ -20,7 +19,6 @@ class TrainingLocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -30,20 +28,23 @@ class TrainingLocationScreen extends StatelessWidget {
         elevation: 0,
         title: Text(
           "mytrainerr.",
-          style: context.headlineSmall.copyWith(color:  AppColors.appbarTextColor, letterSpacing: -0.5),
+          style: context.headlineSmall.copyWith(
+            color: AppColors.appbarTextColor,
+            letterSpacing: -0.5,
+          ),
         ),
         centerTitle: true,
-
       ),
 
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 20,horizontal: 16),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               UpProgressBar(currentStep: 3),
               Gap(24.h),
+
               /// ---------- MAIN TITLE ----------
               Text(
                 AppStrings.setUpYourTrainingLocation.tr,
@@ -51,10 +52,13 @@ class TrainingLocationScreen extends StatelessWidget {
                 style: GoogleFonts.montserrat(
                   fontWeight: FontWeight.w800,
                   fontSize: 22.sp,
-                  color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
+                  color: isDarkMode
+                      ? AppColors.white
+                      : AppColors.blackMainTextColor,
                 ),
               ),
               Gap(6),
+
               /// ---------- SUBTITLE ----------
               Text(
                 AppStrings.pleaseProvideStudioAddress.tr,
@@ -102,9 +106,10 @@ class TrainingLocationScreen extends StatelessWidget {
               Gap(32.h),
               CustomButton(
                 text: AppStrings.continueText.tr,
-                onTap: ()=>AppRouter.route.pushNamed(RoutePath.certificationAndOrganicScreen),
+                onTap: () => AppRouter.route.pushNamed(
+                  RoutePath.certificationAndOrganicScreen,
+                ),
               ),
-
             ],
           ),
         ),

@@ -7,7 +7,8 @@ class AppStrings {
   static const String chooseYourRole = "choose_your_role";
   static const String continueAsClient = "continue_as_Client";
   static const String continueAsTrainer = "continue_as_trainer";
-  static const String selectHowYouWantToUseMytrainerr = "select_how_you_want_to_use_My_trainer";
+  static const String selectHowYouWantToUseMytrainerr =
+      "select_how_you_want_to_use_My_trainer";
 
   static const String letsGetStarted = "let's_get_started";
   static const String email = "email";
@@ -21,7 +22,8 @@ class AppStrings {
   static const String registerNow = "register_Now";
   static const String newHere = "new_here";
   static const String createYourAccount = "create_your_account";
-  static const String joinUsAndStartYourFitnessJourney = "join_us_and_start_your_fitness_journey";
+  static const String joinUsAndStartYourFitnessJourney =
+      "join_us_and_start_your_fitness_journey";
   static const String name = "name";
   static const String egBAlex = "eg_BAlex";
   static const String firstName = "first_name";
@@ -86,7 +88,8 @@ class AppStrings {
   static const String onexSession = "onex_session";
   static const String fivexSession = "fivex_session";
   static const String tenxSessions = "tenx_sessions";
-  static const String cancellationsLessThan12Hours = "cancellations_less_than_12_hours";
+  static const String cancellationsLessThan12Hours =
+      "cancellations_less_than_12_hours";
   static const String bookNow = "book_now";
   static const String reviews = "reviews";
   static const String viewAllReviews = "view_all_reviews";
@@ -100,7 +103,8 @@ class AppStrings {
   static const String serviceFee = "service_fee";
   static const String overall = "overall";
   static const String bookYourFirstSession = "book_your_first_session";
-  static const String yourBookingCouldNotBeCompleted = "your_booking_could_not_be_completed";
+  static const String yourBookingCouldNotBeCompleted =
+      "your_booking_could_not_be_completed";
   static const String tryAgain = "try_again";
   static const String chooseDateAndTime = "Choose_date_and_time";
   static const String seeMyBookings = "see_my_bookings";
@@ -131,7 +135,8 @@ class AppStrings {
   static const String yourReview = "your_review";
   static const String rate = "rate";
   static const String proceedAnyway = "proceed_anyway";
-  static const String cancellationReschedulingWindowHasPassed = "the_cancellation_rescheduling_window_has_passed";
+  static const String cancellationReschedulingWindowHasPassed =
+      "the_cancellation_rescheduling_window_has_passed";
   static const String rescheduleSession = "reschedule_session";
   static const String chooseDateAndTime2 = "choose_date_and_time";
   static const String timeSelection = "time_selection";
@@ -170,7 +175,8 @@ class AppStrings {
   static const String yourMessage = "your_message";
   static const String topic = "topic";
   static const String sendMessage = "send message";
-  static const String areYouSureDeleteAccount = "are_you_sure_you_want_to_delete_your_account";
+  static const String areYouSureDeleteAccount =
+      "are_you_sure_you_want_to_delete_your_account";
   static const String yourStreetAndHouseNumber = "your_street_and_house_number";
   static const String city = "city";
   static const String egBBerlin = "eg_B_Berlin";
@@ -180,7 +186,8 @@ class AppStrings {
   static const String egEgGermany = "eg_Eg_Germany";
   static const String telephoneNumber = "telephone_number";
   static const String yourPhoneNumber = "your_phone_number";
-  static const String enterYourPersonalInformation = "enter_your_personal_information";
+  static const String enterYourPersonalInformation =
+      "enter_your_personal_information";
   static const String uploadProfilePhoto = "upload_profile_photo";
   static const String specializations = "specializations";
   static const String yearOfExperience = "year_of_Experience";
@@ -188,26 +195,34 @@ class AppStrings {
   static const String instagramUrl = "instagram_URL";
   static const String enterYourInstagramUrl = "enter_your_Instagram_URL";
   static const String personalWebsiteUrl = "personal_website_URL";
-  static const String enterYourPersonalWebsiteUrl = "enter_your_Personal_Website_URL";
+  static const String enterYourPersonalWebsiteUrl =
+      "enter_your_Personal_Website_URL";
   static const String continueText = "continue";
-  static const String expertiseAndSpecialization = "expertise_and_Specialization";
-  static const String chooseYourFocusAreas = "choose_your_focus_areas_You_can_select_more_than_one.";
-  static const String setUpYourTrainingLocation = "set_up_your_training_location";
-  static const String pleaseProvideStudioAddress = "please_provide_the_address_of_the_studio";
+  static const String expertiseAndSpecialization =
+      "expertise_and_Specialization";
+  static const String chooseYourFocusAreas =
+      "choose_your_focus_areas_You_can_select_more_than_one.";
+  static const String setUpYourTrainingLocation =
+      "set_up_your_training_location";
+  static const String pleaseProvideStudioAddress =
+      "please_provide_the_address_of_the_studio";
   static const String studioName = "studio_name";
   static const String egEgPeakFitGym = "eg_Eg_Peak_Fit_Gym";
   static const String address = "Address";
   static const String certificationAndOrganic = "certification_and_Organic";
-  static const String presentYourQualifications = "present_your_qualifications_and_connect_you_with_clients";
+  static const String presentYourQualifications =
+      "present_your_qualifications_and_connect_you_with_clients";
   static const String yourCertificates = "your_certificates";
   static const String tapToUpload = "tap_to_upload_or_drag_files_here";
   static const String aboutYou = "about_you";
-  static const String tellClientsAboutYourBackground = "tell_clients_about_your_background_and_training_style";
+  static const String tellClientsAboutYourBackground =
+      "tell_clients_about_your_background_and_training_style";
   static const String skip = "skip";
   static const String verifyYourIdentity = "verify_Your_Identity";
   static const String toKeepSafe = "to_keep_our_platform_safe_and_professional";
   static const String verification = "verification";
-  static const String processFewMinutes = "this_process_usually_takes_only_a_few_minutes";
+  static const String processFewMinutes =
+      "this_process_usually_takes_only_a_few_minutes";
   static const String yourTrainerProfileIsLive = "your_trainer_profile_is_live";
   static const String youAreAllSet = "you_are_all_set_and_ready_to_connect";
   static const String goToDashboard = "go_to_Dashboard";
@@ -217,24 +232,29 @@ class AppStrings {
   static const String accept = "Accept";
   static const String wantToBookHiit = "want_to_book_a_HIIT_session";
   static const String addYourCertificates = "add_Your_Certificates";
-  static const String increaseCustomerConfidence = "this_will_increase_the_level_of_customer_confidence";
+  static const String increaseCustomerConfidence =
+      "this_will_increase_the_level_of_customer_confidence";
   static const String addCertificates = "add_certificates";
   static const String doNotForgetTheseSteps = "do_not_forget_these_steps";
   static const String setupYourPackagePrices = "setup_your_package_prices";
-  static const String setupYourPackagePricesTitle = "setup_your_package_prices_title";
+  static const String setupYourPackagePricesTitle =
+      "setup_your_package_prices_title";
   static const String setupYourAvailability = "setup_your_availability";
-  static const String setupYourAvailabilityTitle = "setup_your_availability_Title";
+  static const String setupYourAvailabilityTitle =
+      "setup_your_availability_Title";
   static const String verifyYourIdentity2 = "verify_your_Identity";
   static const String verifyYourIdentityTitle = "verify_your_Identity_Title";
   static const String activateYourPayment = "activate_your_payment";
   static const String activateYourPaymentTitle = "activate_your_payment_Title";
   static const String setupYourPrices = "setup_your_prices";
   static const String setupYourPricesTitle = "setup_your_prices_title";
-  static const String pricePerIndividualSession = "price_per_individual_session";
+  static const String pricePerIndividualSession =
+      "price_per_individual_session";
   static const String priceForPackOfFive = "price_for_pack_of_five";
   static const String priceForPackOfTen = "Price_for_pack_of_ten";
   static const String offerFreeTrial = "offer_free_trial";
-  static const String cancelAndReschedulePolicy = "cancel_and_reschedule_policy";
+  static const String cancelAndReschedulePolicy =
+      "cancel_and_reschedule_policy";
   static const String alwaysFree = "always_free";
   static const String upToTwelveH = "up_to_Twelve_h";
   static const String upToTwentyFourHours = "up_to_TwentyFour_hours";
@@ -265,27 +285,34 @@ class AppStrings {
   static const String availableAllDay = "available_all_day";
   static const String blockTheDay = "block_the_day";
   static const String oops = "oops";
-  static const String thisDayHasBookingIncluded = "this_day_has_booking_included";
+  static const String thisDayHasBookingIncluded =
+      "this_day_has_booking_included";
   static const String okay = "Okay";
-  static const String areYouSureBlockDay = "are_you_sure_you_want_to_block_the_day";
+  static const String areYouSureBlockDay =
+      "are_you_sure_you_want_to_block_the_day";
   static const String block = "block";
   static const String notAvailable = "not_available";
   static const String available = "available";
   static const String blockATimeWindow = "block_a_time_window";
-  static const String chooseATimeWindow = "choose_a_time_window_you_warn_to_block";
+  static const String chooseATimeWindow =
+      "choose_a_time_window_you_warn_to_block";
   static const String saveForJustThisWeek = "save_for_just_this_week";
-  static const String saveForJustThisWeekTitle = "save_for_just_this_week_title";
+  static const String saveForJustThisWeekTitle =
+      "save_for_just_this_week_title";
   static const String thisWeek = "this_week";
   static const String everyWeek = "every_week";
-  static const String sorryTimeWindowIncluded = "sorry_this_time_window_is_included_not_complete_bookings";
+  static const String sorryTimeWindowIncluded =
+      "sorry_this_time_window_is_included_not_complete_bookings";
   static const String seeReview = "see_Review";
-  static const String areYouSureDeleteThisChat = "are_you_sure_you_want_to_delete_this_chat";
+  static const String areYouSureDeleteThisChat =
+      "are_you_sure_you_want_to_delete_this_chat";
   static const String packageAndPrice = "package_and_price";
   static const String myAvailability = "my_availability";
   static const String earnings = "earnings";
   static const String editProfile = "edit_profile";
   static const String uploadMorePhotosMaxThree = "upload_more_photos_max_three";
-  static const String yourStreetAndHouseNumber2 = "Your_street_and_house_number";
+  static const String yourStreetAndHouseNumber2 =
+      "Your_street_and_house_number";
   static const String yearsOfExperience = "years_of_experience";
   static const String update = "update";
   static const String profilePreview = "profile_preview";
@@ -294,9 +321,11 @@ class AppStrings {
   static const String setUnavailableDatesTitle = "set_Unavailable_Dates_Title";
   static const String packagesAndPrices = "packages_and_Prices";
   static const String freeTrial2 = "Free_trial";
-  static const String cancelAndReschedulePolice = "cancel_and_reschedule_police";
+  static const String cancelAndReschedulePolice =
+      "cancel_and_reschedule_police";
   static const String setThePrice = "set_the_price";
-  static const String setThePriceForThisPackage = "set_the_price_for_this_package";
+  static const String setThePriceForThisPackage =
+      "set_the_price_for_this_package";
   static const String updatePassword = "update_password";
   static const String earningsOverview = "earnings_overview";
   static const String paymentHistory = "payment_history";

@@ -5,12 +5,10 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:my_trainer/core/custom_assets/assets.gen.dart';
+import 'package:my_trainer/core/router/route_path.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
-
-
-
 
 class ChatListScreen extends StatefulWidget {
   const ChatListScreen({super.key});
@@ -26,13 +24,46 @@ class _ChatListScreenState extends State<ChatListScreen> {
     _searchController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final mockChats = [
-      {'name': 'Ann Smith', 'message': 'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.', 'time': '2:34 p.m', 'isUnread': true, 'imageUrl': 'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg'},
-      {'name': 'Ann Smith', 'message': 'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.', 'time': '2:34 p.m', 'isUnread': true, 'imageUrl': 'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg'},
-      {'name': 'Ann Smith', 'message': 'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.', 'time': '2:34 p.m', 'isUnread': false, 'imageUrl': 'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg'},
-      {'name': 'Ann Smith', 'message': 'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.', 'time': '2:34 p.m', 'isUnread': false, 'imageUrl': 'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg'},
+      {
+        'name': 'Ann Smith',
+        'message':
+            'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.',
+        'time': '2:34 p.m',
+        'isUnread': true,
+        'imageUrl':
+            'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg',
+      },
+      {
+        'name': 'Ann Smith',
+        'message':
+            'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.',
+        'time': '2:34 p.m',
+        'isUnread': true,
+        'imageUrl':
+            'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg',
+      },
+      {
+        'name': 'Ann Smith',
+        'message':
+            'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.',
+        'time': '2:34 p.m',
+        'isUnread': false,
+        'imageUrl':
+            'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg',
+      },
+      {
+        'name': 'Ann Smith',
+        'message':
+            'Lorem ipsum dolor sit amet consectetur. Id in diam morbi odio adipiscing egestas.',
+        'time': '2:34 p.m',
+        'isUnread': false,
+        'imageUrl':
+            'https://imgcdn.stablediffusionweb.com/2024/11/4/61652f3f-b0ec-4c62-998f-f72dac59f09d.jpg',
+      },
     ];
     return Scaffold(
       appBar: AppBar(
@@ -60,19 +91,27 @@ class _ChatListScreenState extends State<ChatListScreen> {
                 },
                 prefixIcon: Padding(
                   padding: EdgeInsets.only(left: 8.0),
-                  child: Icon(Iconsax.search_favorite, color: AppColors.grayTextSecondaryColor),
+                  child: Icon(
+                    Iconsax.search_favorite,
+                    color: AppColors.grayTextSecondaryColor,
+                  ),
                 ),
-                placeholderStyle: context.textTheme.bodyMedium?.copyWith(color: AppColors.grayTertiaryTextColor),
+                placeholderStyle: context.textTheme.bodyMedium?.copyWith(
+                  color: AppColors.grayTertiaryTextColor,
+                ),
                 placeholder: AppStrings.lookingForATrainer.tr,
                 decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.backgroundsLinesColor, width: 2),
+                  border: Border.all(
+                    color: AppColors.backgroundsLinesColor,
+                    width: 2,
+                  ),
                   color: AppColors.backgroundColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
             ),
-            // ----------------------------------------------------
 
+            // ----------------------------------------------------
             Gap(16.h),
 
             ...mockChats.map((chat) {
@@ -86,7 +125,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
               final messageStyle = GoogleFonts.montserrat(
                 fontWeight: isUnread ? FontWeight.w600 : FontWeight.w500,
                 fontSize: 13.sp,
-                color: isUnread ? AppColors.blackMainTextColor : AppColors.grayTextSecondaryColor,
+                color: isUnread
+                    ? AppColors.blackMainTextColor
+                    : AppColors.grayTextSecondaryColor,
                 height: 1.2,
               );
 
@@ -108,13 +149,16 @@ class _ChatListScreenState extends State<ChatListScreen> {
 
               return InkWell(
                 onTap: () {
-                  print('Opening chat with ${chat['name']}');
+                  context.pushNamed(RoutePath.chatScreen);
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 12.h),
                   decoration: BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(color: Colors.grey.shade200, width: 1.w),
+                      bottom: BorderSide(
+                        color: Colors.grey.shade200,
+                        width: 1.w,
+                      ),
                     ),
                   ),
                   child: Row(
@@ -132,7 +176,6 @@ class _ChatListScreenState extends State<ChatListScreen> {
                       ),
                       Gap(12.w),
 
-                      // Text Content (Name & Message)
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,15 +205,13 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                chat['time'] as String,
-                                style: timeStyle,
-                              ),
+                              Text(chat['time'] as String, style: timeStyle),
                               Gap(8.w),
                               Icon(
                                 Icons.arrow_forward_ios_rounded,
                                 size: 14.r,
-                                color: AppColors.grayTextSecondaryColor.withValues(alpha: 0.6),
+                                color: AppColors.grayTextSecondaryColor
+                                    .withValues(alpha: 0.6),
                               ),
                             ],
                           ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:my_trainer/features/other/controller/other_controller.dart';
 import 'package:my_trainer/share/widgets/loading/loading_widget.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/enum/app_enum.dart';
+import 'package:my_trainer/utils/color/app_colors.dart';
 
 class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({super.key});
@@ -29,9 +29,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text(
-          AppStrings.aboutUs.tr,
-        ),
+        title: Text(AppStrings.aboutUs.tr),
         centerTitle: true,
       ),
       body: Obx(() {
@@ -41,19 +39,134 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
           case ApiStatus.internetError:
           /*  return NoInternetCard(onTap: ()=>controller.getPrivacyPolicy());*/
           case ApiStatus.noDataFound:
-            return Center(child: Text( "No data found!".tr));
+            return Center(child: Text("No data found!".tr));
           case ApiStatus.error:
-/*            return NoInternetCard(onTap: ()=>controller.getPrivacyPolicy());*/
+          /*            return NoInternetCard(onTap: ()=>controller.getPrivacyPolicy());*/
 
           case ApiStatus.completed:
             return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              child: Text(
-                  maxLines: 30,
-                  "What is lorem ipsum, and when did publishers begin using it?The standard lorem ipsum passage has been a printer's friend for centuries. Like stock photos today, it served as a placeholder for actual content. The original text comes from Cicero's philosophical work  written in 45 BC.The use of the lorem ipsum passage dates back to the 1500s. When printing presses required painstaking hand-setting of type, workers needed something to show clients how their pages would look. To save time, they turned to Cicero's words, creating sample books filled with preset paragraphs.However, it wasn't until the 1960s that the passage became common when Letraset revolutionized the advertising industry with its transfer sheets. These innovative sheets allowed designers to apply pre-printed lorem ipsum text in various fonts and formats directly onto their mockups and prototypes.What does Lorem Ipsum text say?Printers in the 1500s scrambled the words from Cicero's De Finibus Bonorum et Malorum'' after mixing the words in each sentence. The familiar lorem ipsum dolor sit amet text emerged when 16th-century printers adapted Cicero's original work, beginning with the phrase  were rearranged to create the standard dummy text that has become a fundamental tool in design and typography across generations.The short answer is that lorem ipsum text doesn't actually say anything meaningful. It's deliberately scrambled Latin that doesn't form coherent sentences. While it comes from Cicero's De Finibus Bonorum et Malorum,the text has been modified so extensively that it's nonsensical.Why scrambled text? That's exactly the point. By using text that's unreadable but maintains the general pattern of regular writing — including normal word length, spacing, and punctuation — designers can focus on the visual elements of a layout without the actual content getting in the way. The pseudo-Latin appearance gives it a natural feel while ensuring it won't distract from the design itself.")
-        );
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildSection(
+                    "Our mission",
+                    "To connect individuals with world-class personal trainers, making personalized fitness accessible, effective, and motivational for everyone, anytime, anywhere.",
+                  ),
+                  _buildSection(
+                    "Our Vision",
+                    "To be the leading platform in shaping the future of fitness, where technology and human expertise converge to create a healthier, stronger, and more connected world.",
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    "Our values",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.blackMainTextColor,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  _buildValueCard(
+                    icon: Icons.check_circle_outline,
+                    title: "Empowerment",
+                    description:
+                        "We provide the tools and support to help you take control of your fitness journey and achieve your personal best.",
+                  ),
+                  const SizedBox(height: 12),
+                  _buildValueCard(
+                    icon: Icons.stars_outlined,
+                    title: "Excellence",
+                    description:
+                        "We are committed to the highest standards, connecting you with elite trainers and a seamless app experience.",
+                  ),
+                  const SizedBox(height: 12),
+                  _buildValueCard(
+                    icon: Icons.groups_outlined,
+                    title: "Community",
+                    description:
+                        "We foster a supportive and inclusive environment that motivates and celebrates every step of your progress.",
+                  ),
+                  const SizedBox(height: 24),
+                ],
+              ),
+            );
         }
-      },
+      }),
+    );
+  }
+
+  Widget _buildSection(String title, String content) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.blackMainTextColor,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            content,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.grayTextSecondaryColor,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildValueCard({
+    required IconData icon,
+    required String title,
+    required String description,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: AppColors.primaryColor, size: 24),
+              const SizedBox(width: 12),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.blackMainTextColor,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            description,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.grayTextSecondaryColor,
+              height: 1.5,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -26,10 +26,10 @@ class CustomSessionCard extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    double cardHeight = screenHeight * 0.2+10;
+    double cardHeight = screenHeight * 0.2 + 10;
     return Container(
       width: screenWidth,
-      height: cardHeight,
+      constraints: BoxConstraints(minHeight: cardHeight),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -41,51 +41,52 @@ class CustomSessionCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: GoogleFonts.montserrat(
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.w800,
                         fontSize: 24.sp,
-                        color:isDarkMode ? AppColors.white : AppColors.blackMainTextColor
+                        color: isDarkMode
+                            ? AppColors.white
+                            : AppColors.blackMainTextColor,
+                      ),
                     ),
-                  ),
-                   Gap(8),
-                  Text(
-                    description,
-                    style: context.titleSmall
-                  ),
-                     Gap(8.h),
-                  // Button
-                  ElevatedButton(
-                    onPressed: onButtonPressed,
-                    style:Theme.of(context).elevatedButtonTheme.style,
-                    child: Text(buttonText,),
-
-                  ),
-                ],
+                    Gap(8),
+                    Text(description, style: context.titleSmall),
+                    Gap(8.h),
+                    // Button
+                    ElevatedButton(
+                      onPressed: onButtonPressed,
+                      style: Theme.of(context).elevatedButtonTheme.style,
+                      child: Text(buttonText),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            width: screenWidth/2.2,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                image: AssetImage(imagePath), // The image path
-                fit: BoxFit.cover,
+            Container(
+              width: screenWidth / 2.2,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  image: AssetImage(imagePath), // The image path
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:my_trainer/core/custom_assets/assets.gen.dart';
+import 'package:my_trainer/core/router/route_path.dart';
+import 'package:my_trainer/share/widgets/button/custom_button.dart';
+import 'package:my_trainer/share/widgets/certificate_dialog/certificate_dialog.dart';
+import 'package:my_trainer/utils/color/app_colors.dart';
 
 class TrainerDetailsScreen extends StatefulWidget {
   const TrainerDetailsScreen({super.key});
@@ -9,502 +18,826 @@ class TrainerDetailsScreen extends StatefulWidget {
 }
 
 class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
+  final PageController _pageController = PageController();
   int selectedDateIndex = 1;
   String selectedTime = '11:00';
+  int _currentImageIndex = 0;
 
-  final List<Map<String, dynamic>> dates = [
-    {'day': '18', 'weekday': 'Mon'},
-    {'day': '19', 'weekday': 'Tue'},
-    {'day': '20', 'weekday': 'Wed'},
-    {'day': '21', 'weekday': 'Thu'},
-    {'day': '22', 'weekday': 'Fri'},
-
-    {'day': '23', 'weekday': 'Sat'},
-    {'day': '24', 'weekday': 'Sun'},
+  final List<String> _images = [
+    'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800',
+    'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800',
+    'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800',
   ];
 
-  final List<String> times = ['11:00', '12:00', '2:00 p.m', '4:00 p.m'];
+  final List<Map<String, dynamic>> dates = [
+    {'day': '18', 'weekday': 'M'},
+    {'day': '19', 'weekday': 'D'},
+    {'day': '20', 'weekday': 'M'},
+    {'day': '21', 'weekday': 'D'},
+    {'day': '22', 'weekday': 'F'},
+    {'day': '23', 'weekday': 'S'},
+    {'day': '24', 'weekday': 'S'},
+  ];
+
+  final List<String> times = [
+    '11:00',
+    '12:00',
+    '1:00 p.m',
+    '2:00 p.m',
+    '3:00 p.m',
+    '4:00 p.m',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header Image Section
-            Stack(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            padding: EdgeInsets.only(bottom: 100.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: 280,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800',
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 16,
-                  left: 16,
-                  right: 16,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(8),
-                          image: const DecorationImage(
-                            image: NetworkImage(
-                              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200',
-                            ),
+                // Header Image Carousel
+                Stack(
+                  children: [
+                    SizedBox(
+                      height: 300.h,
+                      child: PageView.builder(
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentImageIndex = index;
+                          });
+                        },
+                        itemCount: _images.length,
+                        itemBuilder: (context, index) {
+                          return Image.network(
+                            _images[index],
                             fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    ),
+                    Positioned(
+                      top: 40.h,
+                      left: 16.w,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
                           ),
+                          onPressed: () => context.pop(),
                         ),
                       ),
-                      const Spacer(),
-                      ...List.generate(
-                        4,
-                            (index) => Container(
-                          width: 8,
-                          height: 8,
-                          margin: const EdgeInsets.only(left: 6),
-                          decoration: BoxDecoration(
-                            color: index == 0 ? Colors.white : Colors.white.withOpacity(0.5),
-                            shape: BoxShape.circle,
+                    ),
+                    Positioned(
+                      top: 40.h,
+                      right: 16.w,
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: const Icon(
+                                Iconsax.share,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {},
+                            ),
                           ),
+                          Gap(8.w),
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: IconButton(
+                              icon: const Icon(
+                                Iconsax.heart,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 16.h,
+                      left: 0,
+                      right: 0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(_images.length, (index) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.symmetric(horizontal: 4.w),
+                            height: 8.h,
+                            width: _currentImageIndex == index ? 24.w : 8.w,
+                            decoration: BoxDecoration(
+                              color: _currentImageIndex == index
+                                  ? Colors.white
+                                  : Colors.white.withValues(alpha: 0.5),
+                              borderRadius: BorderRadius.circular(4.r),
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // Content
+                Padding(
+                  padding: EdgeInsets.all(16.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Trainer Name & Rating
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Ann Smith, 26',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.blackMainTextColor,
+                                ),
+                              ),
+                              Gap(8.w),
+                              Assets.icons.verifyed.svg(
+                                width: 20.w,
+                                height: 20.w,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '4.9',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.blackMainTextColor,
+                                ),
+                              ),
+                              Gap(4.w),
+                              Icon(Icons.star, color: Colors.amber, size: 20.r),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Gap(4.h),
+                      // Tags
+                      Row(
+                        children: [
+                          _buildTag('Yoga'),
+                          Gap(8.w),
+                          _buildTag('Stretching'),
+                          Gap(8.w),
+                          _buildTag('Pilates'),
+                        ],
+                      ),
+                      Gap(20.h),
+
+                      // Fast Facts
+                      Text(
+                        'Fast facts',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16
+                              .sp, // Match design, usually ~16-18 for section headers
+                          fontWeight: FontWeight
+                              .w700, // Or w800/w600 depending on exact Font
+                          color: AppColors.blackMainTextColor,
+                          fontStyle: FontStyle.italic,
                         ),
+                      ),
+                      Gap(12.h),
+                      _buildFastFactItem(
+                        icon: Iconsax.location,
+                        title: 'LOCATION',
+                        subtitle: 'Los Angeles, CA – Griffith Park Fields',
+                        trailingIcon: Iconsax.copy,
+                      ),
+                      Gap(12.h),
+                      _buildFastFactItem(
+                        icon: Iconsax.briefcase,
+                        title: 'EXPERIENCE',
+                        subtitle: '5 years',
+                      ),
+                      Gap(12.h),
+                      _buildFastFactItem(
+                        icon: Iconsax.award,
+                        title: 'CERTIFICATE',
+                        subtitle: '3',
+                        trailingIcon: Iconsax.eye,
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => CertificateDialog(
+                              title: "Certificate",
+                              items: [
+                                "Fitness B License",
+                                "Nutrition Coach",
+                                "Fitness B License",
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      Gap(20.h),
+
+                      // About Me
+                      Text(
+                        'About me',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.blackMainTextColor,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+
+                      Gap(8.h),
+                      Text(
+                        'I help my clients improve strength, mobility and balance. My focus is on holistic training and sustainable results...See More',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.grayTextSecondaryColor,
+                          height: 1.5,
+                        ),
+                      ),
+                      Gap(20.h),
+
+                      // Availability Preview
+                      Text(
+                        'Availability preview',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.blackMainTextColor,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      Gap(12.h),
+                      // Dates
+                      SizedBox(
+                        height: 60.h,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: dates.length,
+                          separatorBuilder: (context, index) => Gap(8.w),
+                          itemBuilder: (context, index) {
+                            final isSelected = selectedDateIndex == index;
+                            return GestureDetector(
+                              onTap: () =>
+                                  setState(() => selectedDateIndex = index),
+                              child: Container(
+                                width: 50.w,
+                                decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? AppColors.primaryColor
+                                      : AppColors.bgSecondaryButtonColor,
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  border: isSelected
+                                      ? Border.all(
+                                          color: AppColors.primaryColor,
+                                          width: 2,
+                                        )
+                                      : null,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      dates[index]['weekday'],
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: isSelected
+                                            ? Colors.white
+                                            : AppColors.blackMainTextColor,
+                                      ),
+                                    ),
+                                    Text(
+                                      dates[index]['day'],
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w700,
+                                        color: isSelected
+                                            ? Colors.white
+                                            : AppColors.blackMainTextColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Gap(12.h),
+                      // Times
+                      Wrap(
+                        spacing: 8.w,
+                        runSpacing: 8.h,
+                        children: times.map((time) {
+                          final isSelected = selectedTime == time;
+                          final isDisabled =
+                              time == '1:00 p.m' ||
+                              time == '3:00 p.m'; // Example logic
+                          return GestureDetector(
+                            onTap: isDisabled
+                                ? null
+                                : () => setState(() => selectedTime = time),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16.w,
+                                vertical: 10.h,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? Colors.white
+                                    : (isDisabled
+                                          ? AppColors.bgSecondaryButtonColor
+                                                .withOpacity(0.5)
+                                          : AppColors.bgSecondaryButtonColor),
+                                borderRadius: BorderRadius.circular(12.r),
+                                border: isSelected
+                                    ? Border.all(
+                                        color: AppColors.blackMainTextColor,
+                                        width: 1.5,
+                                      )
+                                    : null,
+                              ),
+                              child: Text(
+                                time,
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: isDisabled
+                                      ? AppColors.grayTextSecondaryColor
+                                      : (isSelected
+                                            ? AppColors.blackMainTextColor
+                                            : AppColors.blackMainTextColor),
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      Gap(20.h),
+
+                      // Cancellation Policy
+                      Container(
+                        padding: EdgeInsets.all(12.w),
+                        decoration: BoxDecoration(
+                          color: AppColors.bgSecondaryButtonColor,
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Iconsax.info_circle,
+                              size: 20.r,
+                              color: AppColors.grayTextSecondaryColor,
+                            ),
+                            Gap(12.w),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Cancellations Policy',
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.blackMainTextColor,
+                                    ),
+                                  ),
+                                  Gap(4.h),
+                                  Text(
+                                    'Cancellations Less Than 12 Hours Before The Session Will Be Charged.',
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.grayTextSecondaryColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Gap(20.h),
+
+                      // Pricing Options
+                      Text(
+                        'Pricing options:',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.blackMainTextColor,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                      Gap(12.h),
+                      _buildPricingCard(
+                        'Trial lesson',
+                        '1 TIME PER CUSTOMER',
+                        '€0.00',
+                        true,
+                      ),
+                      _buildPricingCard(
+                        '1x session',
+                        '1 TIME PER CUSTOMER',
+                        '€30.00',
+                        false,
+                      ),
+                      _buildPricingCard(
+                        '5x session',
+                        '1 TIME PER CUSTOMER',
+                        '€100.00',
+                        false,
+                      ),
+                      _buildPricingCard(
+                        '10x session',
+                        '1 TIME PER CUSTOMER',
+                        '€180.00',
+                        false,
+                      ),
+
+                      Gap(20.h),
+
+                      // Book Now Button
+                      CustomButton(
+                        text: 'Book now',
+                        onTap: () =>
+                            context.pushNamed(RoutePath.bookingNowScreen),
+                      ),
+                      Gap(20.h),
+
+                      // Reviews Header
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Reviews (23)',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.blackMainTextColor,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Gap(12.h),
+                      _buildReviewCard(),
+                      Gap(12.h),
+                      Center(
+                        child: TextButton(
+                          onPressed: () =>
+                              context.pushNamed(RoutePath.reviewScreen),
+                          child: Text("View all reviews"),
+                        ),
+                      ),
+                      Gap(20.h),
+                      // Footer Actions
+                      _buildFooterAction(Iconsax.instagram, 'Instagram'),
+                      Gap(12.h),
+                      _buildFooterAction(Iconsax.global, 'Portfolio'),
+                      Gap(12.h),
+                      _buildFooterAction(
+                        Iconsax.message,
+                        'Chat Now',
+                        isPrimary: true,
+                        onTap: () => context.pushNamed(RoutePath.chatScreen),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
 
-            // Profile Info
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+  Widget _buildTag(String text) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.linesDarkColor),
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.montserrat(
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
+          color: AppColors.grayTextSecondaryColor,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFastFactItem({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    IconData? trailingIcon,
+    VoidCallback? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(12.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(
+            color: AppColors.bgSecondaryButtonColor,
+          ), // Very light border
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.02),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: 24.r, color: AppColors.grayTextSecondaryColor),
+            Gap(12.w),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      const Text(
-                        'Ann Smith, 26',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          children: const [
-                            Text(
-                              '4.9',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(width: 4),
-                            Icon(Icons.star, color: Colors.amber, size: 16),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
                   Text(
-                    'Yoga • Stretching • Pilates',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Fast Facts
-                  const Text(
-                    'Fast facts',
-                    style: TextStyle(
-                      fontSize: 16,
+                    title, // e.g. LOCATION - small caps
+                    style: GoogleFonts.montserrat(
+                      fontSize: 10.sp,
                       fontWeight: FontWeight.w600,
+                      color: AppColors.grayTertiaryTextColor,
+                      letterSpacing: 0.5,
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Icon(Icons.location_on_outlined, size: 18, color: Colors.grey[600]),
-                      const SizedBox(width: 6),
-                      Text(
-                        'Los Angeles, CA - Within 15+4 Folds',
-                        style: TextStyle(fontSize: 13, color: Colors.grey[700]),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Icon(Icons.calendar_today_outlined, size: 18, color: Colors.grey[600]),
-                      const SizedBox(width: 6),
-                      Text(
-                        '5 years',
-                        style: TextStyle(fontSize: 13, color: Colors.grey[700]),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-
-                  // About Me
-                  const Text(
-                    'About me',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
+                  Gap(2.h),
                   Text(
-                    'I help my clients improve through, mobility and balance. My focus is on holistic training and sustainable results. See More',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[700],
-                      height: 1.4,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Availability Preview
-                  const Text(
-                    'Availability preview',
-                    style: TextStyle(
-                      fontSize: 16,
+                    subtitle,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w600,
+                      color: AppColors.blackMainTextColor,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 12),
-
-                  // Date Selector
-                  SizedBox(
-                    height: 70,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: dates.length,
-                      itemBuilder: (context, index) {
-                        final isSelected = selectedDateIndex == index;
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedDateIndex = index;
-                            });
-                          },
-                          child: Container(
-                            width: 48,
-                            margin: const EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                              color: isSelected ? const Color(0xFF00BFA5) : Colors.white,
-                              border: Border.all(
-                                color: isSelected ? const Color(0xFF00BFA5) : Colors.grey[300]!,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  dates[index]['weekday'],
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isSelected ? Colors.white : Colors.grey[600],
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  dates[index]['day'],
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: isSelected ? Colors.white : Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Time Selector
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: times.map((time) {
-                      final isSelected = selectedTime == time;
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedTime = time;
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          decoration: BoxDecoration(
-                            color: isSelected ? const Color(0xFF00BFA5) : Colors.white,
-                            border: Border.all(
-                              color: isSelected ? const Color(0xFF00BFA5) : Colors.grey[300]!,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            time,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: isSelected ? Colors.white : Colors.black,
-                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Cancellation Policy
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.info_outline, size: 18, color: Colors.grey[600]),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'Cancellation Policy',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Colors.grey[700],
-                            ),
-                          ),
-                        ),
-                        Text(
-                          'Cancel anytime before 24hrs. No penalty. No refunds',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: Colors.grey[500],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Pricing Options
-                  const Text(
-                    'Pricing options:',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  _buildPricingOption('Trial lesson', '\$0.00'),
-                  _buildPricingOption('1x session', '\$30.00'),
-                  _buildPricingOption('5x session', '\$100.00'),
-                  _buildPricingOption('10x session', '\$180.00'),
-
-                  const SizedBox(height: 16),
-
-                  // Book Now Button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00BFA5),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: const Text(
-                        'Book now',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Reviews Section
-                  Row(
-                    children: [
-                      const Text(
-                        'Reviews (23)',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          children: const [
-                            Text(
-                              '5.0',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(width: 4),
-                            Icon(Icons.star, color: Colors.amber, size: 16),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Review Card
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[50],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 16,
-                              backgroundColor: Colors.grey[300],
-                              backgroundImage: const NetworkImage(
-                                'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200',
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            const Text(
-                              'Ann Smith',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const Spacer(),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Row(
-                                children: const [
-                                  Text(
-                                    '5.0',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  SizedBox(width: 4),
-                                  Icon(Icons.star, color: Colors.amber, size: 12),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Amet ipsum dolor id erat consectetur. Euis et accumsan mollis. Proin et pretium mauris ultrs ut is in not elit',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.grey[700],
-                            height: 1.4,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  // View All Reviews
-                  Center(
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'View all reviews',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFF00BFA5),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
                 ],
               ),
             ),
+            if (trailingIcon != null)
+              Icon(
+                trailingIcon,
+                size: 20.r,
+                color: AppColors.grayTextSecondaryColor,
+              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildPricingOption(String title, String price) {
+  Widget _buildPricingCard(
+    String title,
+    String subtitle,
+    String price,
+    bool isSelected,
+  ) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(12),
+      margin: EdgeInsets.only(bottom: 12.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey[300]!),
-        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(
+          color: isSelected
+              ? AppColors.primaryColor
+              : AppColors.bgSecondaryButtonColor,
+          width: isSelected ? 1.5 : 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.montserrat(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.blackMainTextColor,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: GoogleFonts.montserrat(
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.grayTextSecondaryColor,
+                ),
+              ),
+            ],
           ),
-          const Spacer(),
           Text(
             price,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF00BFA5),
+            style: GoogleFonts.montserrat(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w700,
+              color: AppColors.primaryColor,
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildReviewCard() {
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 20.r,
+                backgroundImage: NetworkImage(
+                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200',
+                ),
+              ),
+              Gap(12.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Ann Smith',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.blackMainTextColor,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  Text(
+                    '24-10-2025',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.grayTextSecondaryColor,
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+              Row(
+                children: [
+                  Text(
+                    '5.0',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.blackMainTextColor,
+                    ),
+                  ),
+                  Gap(4.w),
+                  Icon(Icons.star, color: Colors.amber, size: 20.r),
+                ],
+              ),
+            ],
+          ),
+          Gap(12.h),
+          Text(
+            'Lorem ipsum dolor sit amet consectetur. Felis et lacus ut egestas urna aliquam scelerisque pretium mauris. Risus aliquam varius ut a. In est viverra dui.',
+            style: GoogleFonts.montserrat(
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w500,
+              color: AppColors.blackMainTextColor,
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFooterAction(
+    IconData icon,
+    String label, {
+    bool isPrimary = false,
+    VoidCallback? onTap,
+  }) {
+    if (isPrimary) {
+      return GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(16.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Icon(icon, color: AppColors.blackMainTextColor),
+              Gap(12.w),
+              Text(
+                label,
+                style: GoogleFonts.montserrat(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.blackMainTextColor,
+                ),
+              ),
+              Spacer(),
+              Container(
+                width: 32.w,
+                height: 32.w,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Iconsax.message, color: AppColors.white, size: 18),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: AppColors.grayTertiaryTextColor),
+            Gap(12.w),
+            Text(
+              label,
+              style: GoogleFonts.montserrat(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.blackMainTextColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

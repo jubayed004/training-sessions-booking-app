@@ -23,11 +23,12 @@ class CertificationAndOrganicScreen extends StatefulWidget {
   const CertificationAndOrganicScreen({super.key});
 
   @override
-  State<CertificationAndOrganicScreen> createState() => _CertificationAndOrganicScreenState();
+  State<CertificationAndOrganicScreen> createState() =>
+      _CertificationAndOrganicScreenState();
 }
 
-class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicScreen> {
-  bool _isOrganicCertified = false;
+class _CertificationAndOrganicScreenState
+    extends State<CertificationAndOrganicScreen> {
   final _certificationNameController = TextEditingController();
 
   @override
@@ -43,7 +44,6 @@ class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicS
 
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final containerColor = isDarkMode ? AppColors.black : Colors.white;
-    final borderColor = isDarkMode ? Colors.grey.shade700 : Colors.grey.shade300;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -52,20 +52,21 @@ class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicS
         elevation: 0,
         title: Text(
           "mytrainerr.",
-          style: context.headlineSmall.copyWith(color:  AppColors.appbarTextColor, letterSpacing: -0.5),
+          style: context.headlineSmall.copyWith(
+            color: AppColors.appbarTextColor,
+            letterSpacing: -0.5,
+          ),
         ),
         centerTitle: true,
-
       ),
 
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-             UpProgressBar(currentStep: 4),
+              UpProgressBar(currentStep: 4),
               Gap(24.h),
 
               Text(
@@ -106,12 +107,12 @@ class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicS
                 decoration: BoxDecoration(
                   color: containerColor,
                   borderRadius: BorderRadius.circular(12.r),
-
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(spacing: 10,
+                    Row(
+                      spacing: 10,
                       children: [
                         Icon(Iconsax.document_upload),
                         Text(
@@ -119,7 +120,6 @@ class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicS
                           style: context.titleSmall,
                           overflow: TextOverflow.ellipsis,
                         ),
-
                       ],
                     ),
                     Icon(Icons.delete_outline_rounded),
@@ -137,7 +137,8 @@ class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicS
               Gap(40.h),
               CustomButton(
                 text: AppStrings.continueText.tr,
-                onTap: ()=>AppRouter.route.pushNamed(RoutePath.verifyIdentityScreen),
+                onTap: () =>
+                    AppRouter.route.pushNamed(RoutePath.verifyIdentityScreen),
               ),
               Gap(32.h),
             ],
@@ -146,7 +147,6 @@ class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicS
       ),
     );
   }
-
 
   Widget _buildUploadCertificationContainer() {
     final borderColor = AppColors.primaryColor;
@@ -157,7 +157,7 @@ class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicS
         color: AppColors.primaryColor,
         padding: EdgeInsets.all(16),
       ),
-      child:  Center(
+      child: Center(
         child: Column(
           children: [
             Container(
@@ -174,10 +174,7 @@ class _CertificationAndOrganicScreenState extends State<CertificationAndOrganicS
               ),
             ),
             Gap(12.h),
-            Text(
-              'Upload your certificate here'.tr,
-              style: context.titleSmall,
-            ),
+            Text('Upload your certificate here'.tr, style: context.titleSmall),
             Gap(4.h),
             Text(
               'Max. 5MB, accepted formats: JPG, PNG, PDF'.tr,

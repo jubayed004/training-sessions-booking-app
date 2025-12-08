@@ -58,6 +58,7 @@ dependencies:
   easy_date_timeline: ^2.0.9
   flutter_calenders: ^1.0.0
   carousel_slider: ^5.1.1
+  image_picker: ^1.2.1
 
 
 dev_dependencies:

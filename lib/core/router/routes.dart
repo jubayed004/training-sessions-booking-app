@@ -24,23 +24,27 @@ import 'package:my_trainer/features/trainers/connected__account/connected_accoun
 import 'package:my_trainer/features/trainers/earnings/earnings_screen.dart';
 import 'package:my_trainer/features/trainers/my_availability/my_availiability_screen.dart';
 import 'package:my_trainer/features/trainers/package_and_price/package_and_price_screen.dart';
+import 'package:my_trainer/features/trainers/trainer_information/edit_trainer_information_screen.dart';
 import 'package:my_trainer/features/trainers/trainer_information/trainer_information_screen.dart';
 import 'package:my_trainer/features/trainers/trainer_nav/trainer_nav_screen.dart';
 import 'package:my_trainer/features/user/bookings/booking_confirmed_screen.dart';
+import 'package:my_trainer/features/user/bookings/booking_now_screen.dart';
+import 'package:my_trainer/features/user/chat/chat_screen.dart';
 import 'package:my_trainer/features/user/favorite_trainer/favorite_trainer_screen.dart';
-import 'package:my_trainer/features/user/inbox/inbox_screen.dart';
 import 'package:my_trainer/features/user/nav/navigation_page.dart';
 import 'package:my_trainer/features/user/profile/personal_information_edit_screen.dart';
 import 'package:my_trainer/features/user/profile/personal_information_screen.dart';
 import 'package:my_trainer/features/other/change_password_screen.dart';
 import 'package:my_trainer/features/other/password_and_security_screen.dart';
 import 'package:my_trainer/features/user/push_notifications/push_notification_screen.dart';
+import 'package:my_trainer/features/user/review/review_screen.dart';
 import 'package:my_trainer/features/user/trainer_details/trainer_details_screen.dart';
 import 'package:my_trainer/features/welcome/welcome_screen.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
 
 class AppRouter {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 
   static final GoRouter initRoute = GoRouter(
     initialLocation: RoutePath.welcomeScreen.addBasePath,
@@ -163,10 +167,7 @@ class AppRouter {
         name: RoutePath.otpScreen,
         path: RoutePath.otpScreen.addBasePath,
         pageBuilder: (context, state) {
-          return _buildPageWithAnimation(
-            child:  OtpScreen(),
-            state: state,
-          );
+          return _buildPageWithAnimation(child: OtpScreen(), state: state);
         },
       ),
       GoRoute(
@@ -174,7 +175,7 @@ class AppRouter {
         path: RoutePath.resetPasswordScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  ResetPasswordScreen(),
+            child: ResetPasswordScreen(),
             state: state,
           );
         },
@@ -184,7 +185,7 @@ class AppRouter {
         path: RoutePath.activeOtpScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  ActiveOtpScreen(),
+            child: ActiveOtpScreen(),
             state: state,
           );
         },
@@ -193,10 +194,7 @@ class AppRouter {
         name: RoutePath.navigationPage,
         path: RoutePath.navigationPage.addBasePath,
         pageBuilder: (context, state) {
-          return _buildPageWithAnimation(
-            child:  NavigationPage(),
-            state: state,
-          );
+          return _buildPageWithAnimation(child: NavigationPage(), state: state);
         },
       ),
       GoRoute(
@@ -204,7 +202,7 @@ class AppRouter {
         path: RoutePath.bookingConfirmationScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  BookingConfirmationScreen(),
+            child: BookingConfirmationScreen(),
             state: state,
           );
         },
@@ -215,7 +213,7 @@ class AppRouter {
         path: RoutePath.personalInformationScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  PersonalInformationScreen(),
+            child: PersonalInformationScreen(),
             state: state,
           );
         },
@@ -225,7 +223,7 @@ class AppRouter {
         path: RoutePath.personalInformationEditScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  PersonalInformationEditScreen(),
+            child: PersonalInformationEditScreen(),
             state: state,
           );
         },
@@ -235,18 +233,18 @@ class AppRouter {
         path: RoutePath.pushNotificationScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  PushNotificationScreen(),
+            child: PushNotificationScreen(),
             state: state,
           );
         },
       ),
-  //=============Setting==========
+      //=============Setting==========
       GoRoute(
         name: RoutePath.passwordAndSecurityScreen,
         path: RoutePath.passwordAndSecurityScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  PasswordAndSecurityScreen(),
+            child: PasswordAndSecurityScreen(),
             state: state,
           );
         },
@@ -256,7 +254,7 @@ class AppRouter {
         path: RoutePath.changePasswordScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  ChangePasswordScreen(),
+            child: ChangePasswordScreen(),
             state: state,
           );
         },
@@ -266,7 +264,7 @@ class AppRouter {
         path: RoutePath.codeOfConductScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  CodeOfConductScreen(),
+            child: CodeOfConductScreen(),
             state: state,
           );
         },
@@ -275,20 +273,14 @@ class AppRouter {
         name: RoutePath.aboutUsScreen,
         path: RoutePath.aboutUsScreen.addBasePath,
         pageBuilder: (context, state) {
-          return _buildPageWithAnimation(
-            child:  AboutUsScreen(),
-            state: state,
-          );
+          return _buildPageWithAnimation(child: AboutUsScreen(), state: state);
         },
       ),
       GoRoute(
         name: RoutePath.contactScreen,
         path: RoutePath.contactScreen.addBasePath,
         pageBuilder: (context, state) {
-          return _buildPageWithAnimation(
-            child:  ContactScreen(),
-            state: state,
-          );
+          return _buildPageWithAnimation(child: ContactScreen(), state: state);
         },
       ),
       GoRoute(
@@ -296,7 +288,7 @@ class AppRouter {
         path: RoutePath.privacyPolicyScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  PrivacyPolicyScreen(),
+            child: PrivacyPolicyScreen(),
             state: state,
           );
         },
@@ -306,7 +298,7 @@ class AppRouter {
         path: RoutePath.termsAndConditionsScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  TermsAndConditionsScreen(),
+            child: TermsAndConditionsScreen(),
             state: state,
           );
         },
@@ -315,10 +307,7 @@ class AppRouter {
         name: RoutePath.imprintScreen,
         path: RoutePath.imprintScreen.addBasePath,
         pageBuilder: (context, state) {
-          return _buildPageWithAnimation(
-            child:  ImprintScreen(),
-            state: state,
-          );
+          return _buildPageWithAnimation(child: ImprintScreen(), state: state);
         },
       ),
       GoRoute(
@@ -326,7 +315,7 @@ class AppRouter {
         path: RoutePath.favoriteTrainerScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  FavoriteTrainerScreen(),
+            child: FavoriteTrainerScreen(),
             state: state,
           );
         },
@@ -336,7 +325,7 @@ class AppRouter {
         path: RoutePath.trainerDetailsScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  TrainerDetailsScreen(),
+            child: TrainerDetailsScreen(),
             state: state,
           );
         },
@@ -346,7 +335,7 @@ class AppRouter {
         path: RoutePath.trainerNavScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  TrainerNavScreen(),
+            child: TrainerNavScreen(),
             state: state,
           );
         },
@@ -356,7 +345,7 @@ class AppRouter {
         path: RoutePath.trainerInformationScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  TrainerInformationScreen(),
+            child: TrainerInformationScreen(),
             state: state,
           );
         },
@@ -366,7 +355,7 @@ class AppRouter {
         path: RoutePath.packageAndPriceScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  PackageAndPriceScreen(),
+            child: PackageAndPriceScreen(),
             state: state,
           );
         },
@@ -376,7 +365,7 @@ class AppRouter {
         path: RoutePath.myAvailiabilityScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  MyAvailiabilityScreen(),
+            child: MyAvailiabilityScreen(),
             state: state,
           );
         },
@@ -386,7 +375,7 @@ class AppRouter {
         path: RoutePath.connectedAccountScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  ConnectedAccountScreen(),
+            child: ConnectedAccountScreen(),
             state: state,
           );
         },
@@ -395,23 +384,52 @@ class AppRouter {
         name: RoutePath.earningsScreen,
         path: RoutePath.earningsScreen.addBasePath,
         pageBuilder: (context, state) {
+          return _buildPageWithAnimation(child: EarningsScreen(), state: state);
+        },
+      ),
+      GoRoute(
+        name: RoutePath.editTrainerInformationScreen,
+        path: RoutePath.editTrainerInformationScreen.addBasePath,
+        pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  EarningsScreen(),
+            child: EditTrainerInformationScreen(),
             state: state,
           );
         },
       ),
-   /*   GoRoute(
-        name: RoutePath.chatListScreen,
-        path: RoutePath.chatListScreen.addBasePath,
+
+      GoRoute(
+        name: RoutePath.chatScreen,
+        path: RoutePath.chatScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(child: ChatScreen(), state: state);
+        },
+      ),
+      GoRoute(
+        name: RoutePath.bookingNowScreen,
+        path: RoutePath.bookingNowScreen.addBasePath,
         pageBuilder: (context, state) {
           return _buildPageWithAnimation(
-            child:  ChatListScreen(),
+            child: BookingNowScreen(),
             state: state,
           );
         },
-      ),*/
+      ),
+      GoRoute(
+        name: RoutePath.reviewScreen,
+        path: RoutePath.reviewScreen.addBasePath,
+        pageBuilder: (context, state) {
+          return _buildPageWithAnimation(child: ReviewScreen(), state: state);
+        },
+      ),
 
+      // GoRoute(
+      //   name: RoutePath.bookingsScreen,
+      //   path: RoutePath.bookingsScreen.addBasePath,
+      //   pageBuilder: (context, state) {
+      //     return _buildPageWithAnimation(child: BookingsScreen(), state: state);
+      //   },
+      // ),
       /*GoRoute(
         name: RoutePath.categoryEventsScreen,
         path: RoutePath.categoryEventsScreen.addBasePath,

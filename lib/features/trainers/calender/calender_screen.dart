@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
@@ -15,6 +16,8 @@ class CalenderScreen extends StatefulWidget {
 }
 
 class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStateMixin {
+  final ValueNotifier<bool> saturdayConnect = ValueNotifier(false);
+  final ValueNotifier<bool> sundayConnect = ValueNotifier(false);
   final List<Map<String, dynamic>> timeSlots = [
     {
       "time": "09:00 - 10:00",
@@ -128,7 +131,6 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
                       ),
                     ),
                     Gap(16),
-
                     SizedBox(
                       height: context.screenHeight/2-92,
                       child: TabBarView(
@@ -170,6 +172,7 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
                                 ],
                               ),
                               Gap(16),
+
                             ],
                           ),
                         ],
@@ -179,6 +182,71 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
                 ),
               ),
             ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16.0,right: 16),
+                child: Column(
+                  spacing: 8,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Available all day".tr,
+                          style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 14.sp,
+                            color: isDarkMode ? AppColors.white : const Color(0xFF1D242D),
+                          ),
+                        ),
+                        Transform.scale(
+                          scale: 0.6,
+                          child: Switch(
+                            value: saturdayConnect.value,
+                            onChanged: (newValue) {
+                              saturdayConnect.value = newValue;
+                            },
+                            activeColor: Colors.white,
+                            activeTrackColor: AppColors.orangeSecondaryAccentColor,
+                            inactiveThumbColor: Colors.white,
+                            inactiveTrackColor: const Color(0xFFE5E7EB),
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Mark this day as unavailable".tr,
+                          style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 14.sp,
+                            color: isDarkMode ? AppColors.white : const Color(0xFF1D242D),
+                          ),
+                        ),
+                        Transform.scale(
+                          scale: 0.6,
+                          child: Switch(
+                            value: saturdayConnect.value,
+                            onChanged: (newValue) {
+                              saturdayConnect.value = newValue;
+                            },
+                            activeColor: Colors.white,
+                            activeTrackColor: AppColors.orangeSecondaryAccentColor,
+                            inactiveThumbColor: Colors.white,
+                            inactiveTrackColor: const Color(0xFFE5E7EB),
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
             SliverList(
               delegate: SliverChildBuilderDelegate(
                     (context, index) {
@@ -212,7 +280,6 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
                           decoration: BoxDecoration(
                             color: Color(0xFFE2F8F8),
                             borderRadius: BorderRadius.circular(20),
-
                           ),
                           child: Row(
                              spacing: 36.w,
@@ -254,7 +321,6 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
                             decoration: BoxDecoration(
                               color: Color(0xFFE2F8F8),
                               borderRadius: BorderRadius.circular(20),
-
                             ),
                             child: Text("Available",style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w800,
@@ -265,7 +331,6 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
                         )
                       ],
                     )
-
                     /*ListTile(
                       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       leading: CircleAvatar(
