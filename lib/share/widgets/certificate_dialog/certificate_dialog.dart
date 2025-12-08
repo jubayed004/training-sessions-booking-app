@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_trainer/core/router/routes.dart';
 
 class CertificateDialog extends StatelessWidget {
   final String title;
@@ -18,16 +18,13 @@ class CertificateDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.white,
       insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.r),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
       child: Padding(
         padding: EdgeInsets.all(20.w),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             /// TITLE + CLOSE BUTTON
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,12 +34,12 @@ class CertificateDialog extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF102039),
+                    color: const Color(0xFF102039),
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => AppRouter.route.pop(),
-                  child: Icon(Icons.close, size: 22.sp, ),
+                  onTap: () => context.pop(),
+                  child: Icon(Icons.close, size: 22.sp),
                 ),
               ],
             ),
@@ -63,11 +60,7 @@ class CertificateDialog extends StatelessWidget {
                           color: const Color(0xFFF3F6FA),
                           borderRadius: BorderRadius.circular(12.r),
                         ),
-                        child: Icon(
-                          Icons.verified_outlined,
-                          size: 20.sp,
-
-                        ),
+                        child: Icon(Icons.verified_outlined, size: 20.sp),
                       ),
                       SizedBox(width: 12.w),
                       Expanded(

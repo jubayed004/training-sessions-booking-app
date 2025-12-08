@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; //
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -36,8 +36,12 @@ class CoachCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final primaryTextColor = isDarkMode ? AppColors.white : AppColors.blackMainTextColor;
-    final cardBackgroundColor = isDarkMode ? AppColors.blackMainTextColor : Colors.white;
+    final primaryTextColor = isDarkMode
+        ? AppColors.white
+        : AppColors.blackMainTextColor;
+    final cardBackgroundColor = isDarkMode
+        ? AppColors.blackMainTextColor
+        : Colors.white;
 
     final mainActivity = skills.isNotEmpty ? skills[0] : '';
     final secondaryActivity = skills.length > 1 ? skills[1] : '';
@@ -45,14 +49,14 @@ class CoachCard extends StatelessWidget {
 
     final priceText = '\$${price.toStringAsFixed(2)} /hr';
 
-    final infoTextColor = isDarkMode ? AppColors.white : AppColors.grayTextSecondaryColor;
+    final infoTextColor = isDarkMode
+        ? AppColors.white
+        : AppColors.grayTextSecondaryColor;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    double cardHeight = screenHeight * 0.2;
     return Container(
       width: screenWidth,
-      height: cardHeight,
-      padding: EdgeInsets.only(right: 10,),
+      padding: EdgeInsets.only(right: 10),
       margin: EdgeInsets.only(bottom: 16.h),
       decoration: BoxDecoration(
         color: cardBackgroundColor,
@@ -70,8 +74,8 @@ class CoachCard extends StatelessWidget {
         children: [
           // CustomNetworkImage adjusted to be smaller
           CustomNetworkImage(
-            height: cardHeight, // Reduced size
-            width:screenWidth/3,// Reduced size
+            height: screenHeight * 0.2, // Reduced size
+            width: screenWidth / 3, // Reduced size
             imageUrl: image,
             borderRadius: BorderRadius.circular(12.r),
             fit: BoxFit.cover,
@@ -88,7 +92,6 @@ class CoachCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-
                         Text(
                           name,
                           style: GoogleFonts.montserrat(
@@ -111,14 +114,16 @@ class CoachCard extends StatelessWidget {
                           style: context.titleLarge,
                         ),
                         Gap(4.w),
-                        Icon(Icons.star, color: AppColors.orangeSecondaryAccentColor, size: 16.r),
+                        Icon(
+                          Icons.star,
+                          color: AppColors.orangeSecondaryAccentColor,
+                          size: 16.r,
+                        ),
                       ],
                     ),
                   ],
                 ),
                 Gap(8.h),
-
-                // Activity Chips Row (INLINE LOGIC)
                 Wrap(
                   spacing: 6.w,
                   runSpacing: 4.h,
@@ -126,9 +131,14 @@ class CoachCard extends StatelessWidget {
                     // --- Main Activity Chip ---
                     if (mainActivity.isNotEmpty)
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 4.h,
+                        ),
                         decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                          color: Theme.of(
+                            context,
+                          ).primaryColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
@@ -144,9 +154,14 @@ class CoachCard extends StatelessWidget {
                     // --- Secondary Activity Chip ---
                     if (secondaryActivity.isNotEmpty)
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 4.h,
+                        ),
                         decoration: BoxDecoration(
-                          color: AppColors.grayTextSecondaryColor.withValues(alpha: 0.1),
+                          color: AppColors.grayTextSecondaryColor.withValues(
+                            alpha: 0.1,
+                          ),
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
@@ -162,9 +177,14 @@ class CoachCard extends StatelessWidget {
                     // --- +N More Chip ---
                     if (moreActivitiesCount > 0)
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 4.h,
+                        ),
                         decoration: BoxDecoration(
-                          color: AppColors.grayTextSecondaryColor.withValues(alpha: 0.1),
+                          color: AppColors.grayTextSecondaryColor.withValues(
+                            alpha: 0.1,
+                          ),
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
@@ -193,7 +213,7 @@ class CoachCard extends StatelessWidget {
                 Gap(4.h),
                 Row(
                   children: [
-                    Icon(Iconsax.money, size: 18.r,),
+                    Icon(Iconsax.money, size: 18.r),
                     Gap(8.w),
                     Flexible(
                       child: Text(

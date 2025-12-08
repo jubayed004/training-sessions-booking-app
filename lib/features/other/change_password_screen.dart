@@ -36,12 +36,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     Widget buildCheckItem(String text, bool valid) {
       return Row(
         spacing: 8,
         children: [
-          Icon(Icons.check_circle, color: valid ? Colors.teal : Colors.grey, size: 20),
+          Icon(
+            Icons.check_circle,
+            color: valid ? Colors.teal : Colors.grey,
+            size: 20,
+          ),
           Text(text, style: context.labelMedium),
         ],
       );
@@ -49,7 +52,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(scrolledUnderElevation: 0, backgroundColor: Colors.transparent, title: Text('Change Password'.tr), centerTitle: true),
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text('Change Password'.tr),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
@@ -66,7 +74,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           title: "Old Password".tr,
                           hintText: AppStrings.enterYourPassword.tr,
                           keyboardType: TextInputType.text,
-                          prefixIcon:  Icon(Iconsax.lock_1,),
+                          prefixIcon: Icon(Iconsax.lock_1),
                           isPassword: true,
                           controller: _oldPassword,
                           validator: TextFieldValidator.password(),
@@ -81,7 +89,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           title: AppStrings.newPassword.tr,
                           hintText: AppStrings.enterYourNewPassword.tr,
                           keyboardType: TextInputType.text,
-                          prefixIcon:  Icon(Iconsax.lock_1,),
+                          prefixIcon: Icon(Iconsax.lock_1),
                           isPassword: true,
                           controller: _resetPassword,
                           validator: TextFieldValidator.password(),
@@ -92,9 +100,24 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         Gap(16.h),
 
                         /// ---------- Password Rule Checklist ----------
-                        Obx(() => buildCheckItem(AppStrings.minimum8Characters.tr, _auth.hasMinLength)),
-                        Obx(() => buildCheckItem(AppStrings.oneNumber.tr, _auth.hasNumber)),
-                        Obx(() => buildCheckItem(AppStrings.oneUppercaseLetter.tr, _auth.hasUppercase)),
+                        Obx(
+                          () => buildCheckItem(
+                            AppStrings.minimum8Characters.tr,
+                            _auth.hasMinLength,
+                          ),
+                        ),
+                        Obx(
+                          () => buildCheckItem(
+                            AppStrings.oneNumber.tr,
+                            _auth.hasNumber,
+                          ),
+                        ),
+                        Obx(
+                          () => buildCheckItem(
+                            AppStrings.oneUppercaseLetter.tr,
+                            _auth.hasUppercase,
+                          ),
+                        ),
                         Gap(24.h),
 
                         /// ---------- Confirm Password ----------
@@ -102,19 +125,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           title: AppStrings.confirmPassword.tr,
                           hintText: AppStrings.confirmYourNewPassword.tr,
                           keyboardType: TextInputType.text,
-                          prefixIcon:  Icon(Iconsax.lock_1,),
+                          prefixIcon: Icon(Iconsax.lock_1),
                           isPassword: true,
                           controller: _resetConfirmPassword,
-                          validator: TextFieldValidator.confirmPassword(_resetPassword),
+                          validator: TextFieldValidator.confirmPassword(
+                            _resetPassword,
+                          ),
                         ),
-
-
                       ],
                     ),
                   ),
                 ),
               ),
-              CustomButton(text: AppStrings.updatePassword.tr,onTap: ()=>AppRouter.route.goNamed(RoutePath.navigationPage),),
+              CustomButton(
+                text: AppStrings.updatePassword.tr,
+                onTap: () => AppRouter.route.goNamed(RoutePath.navigationPage),
+              ),
             ],
           ),
         ),

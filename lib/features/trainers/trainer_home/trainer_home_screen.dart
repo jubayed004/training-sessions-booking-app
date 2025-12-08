@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart';
+import 'package:my_trainer/core/router/route_path.dart';
+import 'package:my_trainer/core/router/routes.dart';
 import 'package:my_trainer/share/widgets/align/custom_align_text.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
@@ -17,7 +19,6 @@ class TrainerHomeScreen extends StatefulWidget {
   @override
   State<TrainerHomeScreen> createState() => _TrainerHomeScreenState();
 }
-
 
 class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
   @override
@@ -31,7 +32,10 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
         elevation: 0,
         title: Text(
           "mytrainerr.",
-          style: context.headlineSmall.copyWith(color:  AppColors.appbarTextColor, letterSpacing: -0.5),
+          style: context.headlineSmall.copyWith(
+            color: AppColors.appbarTextColor,
+            letterSpacing: -0.5,
+          ),
         ),
 
         actions: [
@@ -39,21 +43,23 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
             margin: EdgeInsets.only(right: 16),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: AppColors.linesDarkColor,width: 1)
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: AppColors.linesDarkColor, width: 1),
             ),
             child: Icon(Iconsax.notification_bing),
           ),
-        ]
-
+        ],
       ),
-      body:SafeArea(
+      body: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 16,
+                ),
                 child: Column(
                   children: [
                     CustomAlignText(
@@ -61,7 +67,9 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                       style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.w800,
                         fontSize: 24.sp,
-                        color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
+                        color: isDarkMode
+                            ? AppColors.white
+                            : AppColors.blackMainTextColor,
                       ),
                     ),
                     Gap(12),
@@ -101,7 +109,9 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                                   style: GoogleFonts.montserrat(
                                     fontWeight: FontWeight.w800,
                                     fontSize: 14.sp,
-                                    color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
+                                    color: isDarkMode
+                                        ? AppColors.white
+                                        : AppColors.blackMainTextColor,
                                   ),
                                 ),
                                 ClipRRect(
@@ -109,7 +119,8 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                                   child: SizedBox(
                                     width: 40.w,
                                     height: 40.h,
-                                    child: Assets.images.upcomeingsessionimage.image(),
+                                    child: Assets.images.upcomeingsessionimage
+                                        .image(),
                                   ),
                                 ),
                                 Text(
@@ -117,7 +128,9 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                                   style: GoogleFonts.montserrat(
                                     fontWeight: FontWeight.w800,
                                     fontSize: 14.sp,
-                                    color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
+                                    color: isDarkMode
+                                        ? AppColors.white
+                                        : AppColors.blackMainTextColor,
                                   ),
                                 ),
                               ],
@@ -135,7 +148,9 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w800,
                             fontSize: 14.sp,
-                            color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
+                            color: isDarkMode
+                                ? AppColors.white
+                                : AppColors.blackMainTextColor,
                           ),
                         ),
                         CircleAvatar(
@@ -152,7 +167,6 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),
@@ -160,12 +174,15 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
 
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (context, index) {
+                (context, index) {
                   return Container(
-                    margin: EdgeInsets.only(left: 16,bottom: 8,right: 16),
+                    margin: EdgeInsets.only(left: 16, bottom: 8, right: 16),
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.linesDarkColor, width: 1),
+                      border: Border.all(
+                        color: AppColors.linesDarkColor,
+                        width: 1,
+                      ),
                       borderRadius: BorderRadius.circular(20),
                       color: AppColors.white,
                     ),
@@ -190,7 +207,9 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                               style: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 14.sp,
-                                color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
+                                color: isDarkMode
+                                    ? AppColors.white
+                                    : AppColors.blackMainTextColor,
                               ),
                             ),
                             Text(
@@ -199,17 +218,27 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
                             ),
                             FilledButton(
                               style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all(AppColors.primaryColor),
+                                backgroundColor: WidgetStateProperty.all(
+                                  AppColors.primaryColor,
+                                ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                AppRouter.route.pushNamed(RoutePath.chatScreen);
+                              },
                               child: Row(
+                                spacing: 6,
                                 children: [
                                   Assets.icons.messages.svg(
-                                    colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+                                    colorFilter: ColorFilter.mode(
+                                      AppColors.white,
+                                      BlendMode.srcIn,
+                                    ),
                                   ),
                                   Text(
                                     AppStrings.message.tr,
-                                    style: context.titleSmall.copyWith(color: Colors.white),
+                                    style: context.titleSmall.copyWith(
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -225,9 +254,7 @@ class _TrainerHomeScreenState extends State<TrainerHomeScreen> {
             ),
           ],
         ),
-      )
-
-
+      ),
     );
   }
 }

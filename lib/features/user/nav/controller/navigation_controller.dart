@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart';
 import 'package:my_trainer/features/user/bookings/bookings_screen.dart';
-import 'package:my_trainer/features/user/chat/chat_screen.dart';
 import 'package:my_trainer/features/user/coach/coach_screen.dart';
 import 'package:my_trainer/features/user/home/home_screen.dart';
 import 'package:my_trainer/features/user/inbox/inbox_screen.dart';
@@ -19,6 +18,7 @@ class NavigationController extends GetxController {
       ProfileScreen(),
     ];
   }
+
   final List<SvgGenImage> icons = [
     Assets.icons.home,
     Assets.icons.profile2user,
@@ -27,11 +27,5 @@ class NavigationController extends GetxController {
     Assets.icons.profile,
   ];
 
-  final List<String> labels = [
-    "Home",
-    "Coach",
-    "Bookings",
-    "Chat",
-    "Profile",
-  ];
+  final List<String> labels = ["Home", "Coach", "Bookings", "Chat", "Profile"];
 }

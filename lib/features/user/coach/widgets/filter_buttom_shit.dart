@@ -26,8 +26,9 @@ class FilterModalContent extends StatefulWidget {
   @override
   _FilterModalContentState createState() => _FilterModalContentState();
 }
+
 class _FilterModalContentState extends State<FilterModalContent> {
-  final _locationController =TextEditingController();
+  final _locationController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final List<String> tags = [
     'Weight loss',
@@ -47,17 +48,17 @@ class _FilterModalContentState extends State<FilterModalContent> {
     return makeDismissable(
       child: DraggableScrollableSheet(
         initialChildSize: 0.7,
-         minChildSize: 0.5,
-         maxChildSize: 1,
-         builder: (_,controller)=>Container(
-           decoration: BoxDecoration(
-               color: AppColors.white,
-               borderRadius: BorderRadiusGeometry.vertical(
-                   top: Radius.circular(20)
-               )
-           ),
-      
-           child: SingleChildScrollView(
+        minChildSize: 0.5,
+        maxChildSize: 1,
+        builder: (_, controller) => Container(
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadiusGeometry.vertical(
+              top: Radius.circular(20),
+            ),
+          ),
+
+          child: SingleChildScrollView(
             controller: controller,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -66,7 +67,6 @@ class _FilterModalContentState extends State<FilterModalContent> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Header with title and close button
                     Row(
                       children: [
                         Text(
@@ -93,7 +93,10 @@ class _FilterModalContentState extends State<FilterModalContent> {
                       items: ['Most popular', 'Newest', 'Highest rated'],
                     ),
                     Gap(16),
-                    Text(AppStrings.price.tr, style: context.textTheme.bodyLarge),
+                    Text(
+                      AppStrings.price.tr,
+                      style: context.textTheme.bodyLarge,
+                    ),
                     Gap(8),
                     CustomDropdownField(
                       value: "€50-75",
@@ -104,7 +107,10 @@ class _FilterModalContentState extends State<FilterModalContent> {
                       items: ['€50-75', '€100-175', '€150-275'],
                     ),
                     Gap(16),
-                    Text(AppStrings.experience.tr, style: context.textTheme.bodyLarge),
+                    Text(
+                      AppStrings.experience.tr,
+                      style: context.textTheme.bodyLarge,
+                    ),
                     Gap(8),
                     CustomDropdownField(
                       value: "0-6 month",
@@ -122,11 +128,14 @@ class _FilterModalContentState extends State<FilterModalContent> {
                       keyboardType: TextInputType.streetAddress,
                     ),
                     Gap(16),
-                    Text(AppStrings.specifications.tr, style: context.textTheme.bodyLarge),
-                    // Tags wrap
+                    Text(
+                      AppStrings.specifications.tr,
+                      style: context.textTheme.bodyLarge,
+                    ),
+
                     Wrap(
-                      spacing: 10.0, // Space between tags
-                      runSpacing: 10.0, // Space between lines
+                      spacing: 10.0,
+                      runSpacing: 10.0,
                       children: tags.map((tag) {
                         return TagItem(
                           tag: tag,
@@ -144,20 +153,23 @@ class _FilterModalContentState extends State<FilterModalContent> {
                       }).toList(),
                     ),
                     SizedBox(height: 16),
-                    CustomButton(text: AppStrings.submit.tr,onTap: ()=>AppRouter.route.pop(),)
+                    CustomButton(
+                      text: AppStrings.submit.tr,
+                      onTap: () => AppRouter.route.pop(),
+                    ),
                   ],
                 ),
               ),
             ),
-                 ),
-         ),
+          ),
+        ),
       ),
     );
   }
 }
 
-Widget makeDismissable({required Widget child})=>GestureDetector(
+Widget makeDismissable({required Widget child}) => GestureDetector(
   behavior: HitTestBehavior.opaque,
-  onTap: ()=>AppRouter.route.pop(),
-  child: GestureDetector(onTap: (){},child: child,),
+  onTap: () => AppRouter.route.pop(),
+  child: GestureDetector(onTap: () {}, child: child),
 );

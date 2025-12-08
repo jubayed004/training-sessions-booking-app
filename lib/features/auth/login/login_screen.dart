@@ -3,14 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:my_trainer/core/custom_assets/assets.gen.dart';
 import 'package:my_trainer/core/router/route_path.dart';
 import 'package:my_trainer/core/router/routes.dart';
 import 'package:my_trainer/features/auth/controller/auth_controller.dart';
 import 'package:my_trainer/helper/validator/text_field_validator.dart';
 import 'package:my_trainer/share/widgets/align/custom_align_text.dart';
-import 'package:my_trainer/share/widgets/button/custom_back_button.dart';
 import 'package:my_trainer/share/widgets/button/custom_button.dart';
 import 'package:my_trainer/share/widgets/text_field/custom_text_field.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
@@ -34,7 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
         centerTitle: true,
         title: Text(
           "mytrainerr.".tr,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: isDarkMode ? Colors.white : Color(0xFFE94E6C), letterSpacing: -0.5),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: isDarkMode ? Colors.white : Color(0xFFE94E6C),
+            letterSpacing: -0.5,
+          ),
         ),
       ),
       body: SafeArea(
@@ -50,14 +51,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.w800,
                       fontSize: 24.sp,
-                      color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
+                      color: isDarkMode
+                          ? AppColors.white
+                          : AppColors.blackMainTextColor,
                     ),
                   ),
                   Gap(8),
                   Text(
                     AppStrings.letsGetStarted.tr,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: isDarkMode ? Colors.black : AppColors.grayTextSecondaryColor
+                      color: isDarkMode
+                          ? Colors.black
+                          : AppColors.grayTextSecondaryColor,
                     ),
                   ),
                   Gap(24),
@@ -76,7 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIcon: Icon(Icons.lock_outline),
                     isPassword: true,
                     validator: TextFieldValidator.password(),
-
                   ),
                   Gap(14),
                   Row(
@@ -84,22 +88,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       SizedBox(),
                       GestureDetector(
-                        onTap: ()=>AppRouter.route.pushNamed(RoutePath.forgetPasswordScreen),
+                        onTap: () => AppRouter.route.pushNamed(
+                          RoutePath.forgetPasswordScreen,
+                        ),
                         child: CustomAlignText(
-                          text: AppStrings.forgotYourPassword.tr,textAlign: TextAlign.end,style: Theme.of(context).textTheme.titleSmall,),
+                          text: AppStrings.forgotYourPassword.tr,
+                          textAlign: TextAlign.end,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
                       ),
                     ],
                   ),
                   Gap(28),
                   CustomButton(
                     text: AppStrings.logIn.tr,
-                    onTap: (){
-                      _authController.isUser.value== true? AppRouter.route.goNamed(RoutePath.navigationPage):AppRouter.route.goNamed(RoutePath.trainerNavScreen);
-                    }
+                    onTap: () {
+                      _authController.isUser.value == true
+                          ? AppRouter.route.goNamed(RoutePath.navigationPage)
+                          : AppRouter.route.goNamed(RoutePath.trainerNavScreen);
+                    },
                   ),
                   Gap(32),
                   Row(
-                    children:  [
+                    children: [
                       Expanded(
                         child: Divider(
                           color: AppColors.grayTextSecondaryColor,
@@ -109,12 +120,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: Text(
-                         AppStrings.orContinueWith.tr,
-                          style:GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14.sp,
-                              color:isDarkMode ? AppColors.white : AppColors.blackMainTextColor
-                          )
+                          AppStrings.orContinueWith.tr,
+                          style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 14.sp,
+                            color: isDarkMode
+                                ? AppColors.white
+                                : AppColors.blackMainTextColor,
+                          ),
                         ),
                       ),
                       Expanded(
@@ -125,7 +138,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-                Gap(24),
+                  Gap(24),
+
                   /// ----------- SOCIAL ICONS ------------
                   Row(
                     spacing: 24,
@@ -135,32 +149,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       Assets.icons.apple.svg(),
                     ],
                   ),
-                 Gap(32),
+                  Gap(32),
+
                   /// ----------- New Here + Register ----------
                   Column(
                     spacing: 4,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
+                    children: [
                       Text(
                         AppStrings.newHere.tr,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
 
                       GestureDetector(
-                        onTap: ()=>AppRouter.route.pushNamed(RoutePath.vendorSelectionScreen),
+                        onTap: () => AppRouter.route.pushNamed(
+                          RoutePath.vendorSelectionScreen,
+                        ),
                         child: Text(
-                         AppStrings.registerNow.tr,
-                          style:Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: isDarkMode? AppColors.white : AppColors.greenTextColor
-                          ),
+                          AppStrings.registerNow.tr,
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(
+                                color: isDarkMode
+                                    ? AppColors.white
+                                    : AppColors.greenTextColor,
+                              ),
                         ),
                       ),
                     ],
                   ),
-
-
-
-
                 ],
               ),
             ),

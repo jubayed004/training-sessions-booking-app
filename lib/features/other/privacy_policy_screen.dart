@@ -4,9 +4,10 @@ import 'package:my_trainer/features/other/controller/other_controller.dart';
 import 'package:my_trainer/share/widgets/loading/loading_widget.dart';
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/enum/app_enum.dart';
+import 'package:my_trainer/utils/color/app_colors.dart';
 
 class PrivacyPolicyScreen extends StatefulWidget {
-   const PrivacyPolicyScreen({super.key});
+  const PrivacyPolicyScreen({super.key});
 
   @override
   State<PrivacyPolicyScreen> createState() => _PrivacyPolicyScreenState();
@@ -28,9 +29,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text(
-          AppStrings.privacyPolicy.tr,
-        ),
+        title: Text(AppStrings.privacyPolicy.tr),
         centerTitle: true,
       ),
       body: Obx(() {
@@ -40,19 +39,78 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
           case ApiStatus.internetError:
           /*  return NoInternetCard(onTap: ()=>controller.getPrivacyPolicy());*/
           case ApiStatus.noDataFound:
-            return Center(child: Text( "No data found!".tr));
+            return Center(child: Text("No data found!".tr));
           case ApiStatus.error:
-/*            return NoInternetCard(onTap: ()=>controller.getPrivacyPolicy());*/
+          /*            return NoInternetCard(onTap: ()=>controller.getPrivacyPolicy());*/
 
           case ApiStatus.completed:
             return SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                child: Text(
-                    maxLines: 30,
-                    "What is lorem ipsum, and when did publishers begin using it?The standard lorem ipsum passage has been a printer's friend for centuries. Like stock photos today, it served as a placeholder for actual content. The original text comes from Cicero's philosophical work  written in 45 BC.The use of the lorem ipsum passage dates back to the 1500s. When printing presses required painstaking hand-setting of type, workers needed something to show clients how their pages would look. To save time, they turned to Cicero's words, creating sample books filled with preset paragraphs.However, it wasn't until the 1960s that the passage became common when Letraset revolutionized the advertising industry with its transfer sheets. These innovative sheets allowed designers to apply pre-printed lorem ipsum text in various fonts and formats directly onto their mockups and prototypes.What does Lorem Ipsum text say?Printers in the 1500s scrambled the words from Cicero's De Finibus Bonorum et Malorum'' after mixing the words in each sentence. The familiar lorem ipsum dolor sit amet text emerged when 16th-century printers adapted Cicero's original work, beginning with the phrase  were rearranged to create the standard dummy text that has become a fundamental tool in design and typography across generations.The short answer is that lorem ipsum text doesn't actually say anything meaningful. It's deliberately scrambled Latin that doesn't form coherent sentences. While it comes from Cicero's De Finibus Bonorum et Malorum,the text has been modified so extensively that it's nonsensical.Why scrambled text? That's exactly the point. By using text that's unreadable but maintains the general pattern of regular writing — including normal word length, spacing, and punctuation — designers can focus on the visual elements of a layout without the actual content getting in the way. The pseudo-Latin appearance gives it a natural feel while ensuring it won't distract from the design itself.")
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Last updated: October 24, 2023",
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColors.grayTextSecondaryColor,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    "We are pleased about your interest in our app MYTRAINERR. Protecting your privacy is very important to us. Below we will inform you in detail about how your data is handled.",
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.grayTextSecondaryColor,
+                      height: 1.5,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  _buildSection(
+                    "1. Responsible body",
+                    "The responsible body for data processing in connection with this app is:\nMYTRAINERR GmbH\nMusterstrasse 1\n12345 Model City\nGermany\nEmail: privacy@mytrainerr.com",
+                  ),
+                  _buildSection(
+                    "2. Collection and use of your data",
+                    "We collect and use your personal data to ensure the functionality of the app and to provide our services. These include:\n\nAccount information: name, email address, password, profile picture.\n\nUsage data: Booked courses, preferred trainers, app interactions.\n\nPayment data: To process bookings via third-party providers.",
+                  ),
+                  _buildSection(
+                    "3. Your rights",
+                    "You have the right to information, correction, deletion, restriction of processing, objection to processing and the right to data portability. If you have any questions about the collection, processing or use of your personal data, please contact our data protection officer:\n\nEmail: dpo@mytrainerr.com",
+                  ),
+                  _buildSection(
+                    "4. Data security",
+                    "We take technical and organizational security measures to protect your data against accidental or unlawful deletion, alteration or loss and against unauthorized disclosure or access.",
+                  ),
+                ],
+              ),
             );
         }
-      },
+      }),
+    );
+  }
+
+  Widget _buildSection(String title, String content) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.blackMainTextColor,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            content,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.grayTextSecondaryColor,
+              height: 1.5,
+            ),
+          ),
+        ],
       ),
     );
   }

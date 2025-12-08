@@ -31,10 +31,15 @@ class RemainingSessionsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final primaryTextColor = isDarkMode ? AppColors.white : AppColors.blackMainTextColor;
-    final cardBackgroundColor = isDarkMode ? AppColors.blackMainTextColor : Colors.white;
-    final secondaryTextColor = isDarkMode ? AppColors.black : AppColors.white;
-    final progress = totalSessions > 0 ? (sessionsRemaining / totalSessions) : 0.0;
+    final primaryTextColor = isDarkMode
+        ? AppColors.white
+        : AppColors.blackMainTextColor;
+    final cardBackgroundColor = isDarkMode
+        ? AppColors.blackMainTextColor
+        : Colors.white;
+    final progress = totalSessions > 0
+        ? (sessionsRemaining / totalSessions)
+        : 0.0;
 
     return Container(
       width: 1.sw,
@@ -86,24 +91,30 @@ class RemainingSessionsCard extends StatelessWidget {
                 Gap(8.h),
                 Row(
                   children: [
-                    Icon(
-                      Iconsax.clock,
-                      size: 16.r,
-                    ),
+                    Icon(Iconsax.clock, size: 16.r),
                     Gap(4.w),
-                    Text(
-                      'REMAINING SESSION '.tr,
-                      style:context.textTheme.labelMedium,
-                    ),
-                    Text(
-                      '$sessionsRemaining',
-                      style:context.textTheme.labelLarge?.copyWith(
-                        color: AppColors.primaryColor
+                    Flexible(
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'REMAINING SESSION '.tr,
+                              style: context.textTheme.labelMedium,
+                            ),
+                            TextSpan(
+                              text: '$sessionsRemaining',
+                              style: context.textTheme.labelLarge?.copyWith(
+                                color: AppColors.primaryColor,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' of $totalSessions',
+                              style: context.textTheme.labelSmall,
+                            ),
+                          ],
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    Text(
-                      ' of $totalSessions',
-                      style: context.textTheme.labelSmall,
                     ),
                   ],
                 ),
@@ -113,7 +124,9 @@ class RemainingSessionsCard extends StatelessWidget {
                   child: LinearProgressIndicator(
                     value: progress,
                     backgroundColor: AppColors.backgroundsLinesColor,
-                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      AppColors.primaryColor,
+                    ),
                     minHeight: 8.h,
                   ),
                 ),
@@ -124,10 +137,15 @@ class RemainingSessionsCard extends StatelessWidget {
           GestureDetector(
             onTap: onChatPressed,
             child: CircleAvatar(
-              radius: 30,
+              radius: 25,
               backgroundColor: AppColors.tertiaryTextColor,
               child: Center(
-                child:   Assets.icons.messages.svg(colorFilter: ColorFilter.mode(AppColors.white,BlendMode.srcIn )),
+                child: Assets.icons.messages.svg(
+                  colorFilter: ColorFilter.mode(
+                    AppColors.white,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
           ),
