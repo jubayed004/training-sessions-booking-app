@@ -3,91 +3,260 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_trainer/core/custom_assets/assets.gen.dart';
+
+import 'package:my_trainer/features/trainers/calender/widgets/calendar_tab_view.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
 import 'package:my_trainer/utils/extension/base_extension.dart';
-import 'package:flutter_calenders/flutter_calenders.dart';
+import 'widgets/cancel_bottom_sheet.dart';
+import 'widgets/list_sub_tab.dart';
+import 'controller/calender_controller.dart';
 
-class CalenderScreen extends StatefulWidget {
+class CalenderScreen extends GetView<CalenderController> {
   const CalenderScreen({super.key});
 
-  @override
-  State<CalenderScreen> createState() => _CalenderScreenState();
-}
+  Widget buildListTab(BuildContext context, bool isDarkMode) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            ListSubTab(
+              label: "upcoming",
+              index: 0,
+              selectedIndex: controller.selectedListTab.value,
+              isDarkMode: isDarkMode,
+              onTap: controller.changeListTab,
+            ),
+            ListSubTab(
+              label: "past",
+              index: 1,
+              selectedIndex: controller.selectedListTab.value,
+              isDarkMode: isDarkMode,
+              onTap: controller.changeListTab,
+            ),
+            ListSubTab(
+              label: "cancelled",
+              index: 2,
+              selectedIndex: controller.selectedListTab.value,
+              isDarkMode: isDarkMode,
+              onTap: controller.changeListTab,
+            ),
+          ],
+        ),
+        Gap(16),
+        Expanded(
+          child: Obx(() {
+            List<Map<String, dynamic>> appointments;
+            if (controller.selectedListTab.value == 1) {
+              appointments = controller.pastAppointments;
+            } else if (controller.selectedListTab.value == 2) {
+              appointments = controller.cancelledAppointments;
+            } else {
+              appointments = controller.upcomingAppointments;
+            }
 
-class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStateMixin {
-  final ValueNotifier<bool> saturdayConnect = ValueNotifier(false);
-  final ValueNotifier<bool> sundayConnect = ValueNotifier(false);
-  final List<Map<String, dynamic>> timeSlots = [
-    {
-      "time": "09:00 - 10:00",
-      'name': 'Jubayed Islam',
-      'status': 'Available',
-      'hasMessage': true,
-    },
-    {
-      'time': '10:10 - 11:10',
-      'name': 'Jon Dhone',
-      'status': 'Available',
-      'hasMessage': false,
-    },
-    {
-      'time': '09:00 - 10:00',
-      'name': 'Ann Smith',
-      'status': 'Available',
-      'hasMessage': true,
-    },
-    {
-      'time': '10:10 - 11:10',
-      'name': 'Jon Dhone',
-      'status': 'Available',
-      'hasMessage': false,
-    },
-    {
-      'time': '10:10 - 11:10',
-      'name': 'Jon Dhone',
-      'status': 'Available',
-      'hasMessage': false,
-    },
-    {
-      'time': '10:10 - 11:10',
-      'name': 'Jon Dhone',
-      'status': 'Available',
-      'hasMessage': false,
-    },
-    {
-      'time': '10:10 - 11:10',
-      'name': 'Jon Dhone',
-      'status': 'Available',
-      'hasMessage': false,
-    },
-    {
-      'time': '10:10 - 11:10',
-      'name': 'Jon Dhone',
-      'status': 'Available',
-      'hasMessage': false,
-    },
-    {
-      'time': '10:10 - 11:10',
-      'name': 'Jon Dhone',
-      'status': 'Available',
-      'hasMessage': false,
-    },
-
-  ];
-
-  late TabController tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 2, vsync: this);
+            return ListView.builder(
+              itemCount: appointments.length,
+              itemBuilder: (context, index) {
+                return _buildAppointmentCard(
+                  context,
+                  appointments[index],
+                  isDarkMode,
+                );
+              },
+            );
+          }),
+        ),
+      ],
+    );
   }
 
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
+  Widget _buildAppointmentCard(
+    BuildContext context,
+    Map<String, dynamic> appointment,
+    bool isDarkMode,
+  ) {
+    bool isPast = controller.selectedListTab.value == 1;
+    bool isCancelled = controller.selectedListTab.value == 2;
+
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isDarkMode
+            ? AppColors.blackMainTextColor.withOpacity(0.1)
+            : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CircleAvatar(
+            radius: 28,
+            backgroundImage: NetworkImage(appointment['image']),
+          ),
+          Gap(12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${appointment['name']}, ${appointment['age']}",
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 15.sp,
+                        color: isDarkMode
+                            ? AppColors.white
+                            : AppColors.blackMainTextColor,
+                      ),
+                    ),
+                    if (isPast)
+                      Text(
+                        "Complete",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 13.sp,
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    else if (!isCancelled)
+                      Text(
+                        "Confirm",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 13.sp,
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                  ],
+                ),
+                Gap(4),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_today,
+                      size: 14,
+                      color: AppColors.grayTertiaryTextColor,
+                    ),
+                    Gap(6),
+                    Text(
+                      appointment['date'],
+                      style: GoogleFonts.montserrat(
+                        fontSize: 13.sp,
+                        color: AppColors.grayTertiaryTextColor,
+                      ),
+                    ),
+                  ],
+                ),
+                Gap(4),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      size: 14,
+                      color: AppColors.grayTertiaryTextColor,
+                    ),
+                    Gap(6),
+                    Expanded(
+                      child: Text(
+                        appointment['location'],
+                        style: GoogleFonts.montserrat(
+                          fontSize: 13.sp,
+                          color: AppColors.grayTertiaryTextColor,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                Gap(12),
+                if (isPast)
+                  OutlinedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "See Review",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14.sp,
+                        color: isDarkMode
+                            ? AppColors.white
+                            : AppColors.blackMainTextColor,
+                      ),
+                    ),
+                  )
+                else if (!isCancelled)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
+                                ),
+                              ),
+                              builder: (context) => CancelBottomSheet(
+                                appointment: appointment,
+                                isDarkMode: isDarkMode,
+                              ),
+                            );
+                          },
+
+                          child: Text(
+                            "Cancel",
+                            style: GoogleFonts.montserrat(
+                              fontSize: 14.sp,
+                              color: isDarkMode
+                                  ? AppColors.white
+                                  : AppColors.blackMainTextColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Gap(10),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.message,
+                                size: 16,
+                                color: Colors.white,
+                              ),
+                              Gap(6),
+                              Text(
+                                "message",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14.sp,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -102,7 +271,10 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
         elevation: 0,
         title: Text(
           "mytrainerr.",
-          style: context.headlineSmall.copyWith(color: AppColors.appbarTextColor, letterSpacing: -0.5),
+          style: context.headlineSmall.copyWith(
+            color: AppColors.appbarTextColor,
+            letterSpacing: -0.5,
+          ),
         ),
       ),
       body: SafeArea(
@@ -110,13 +282,16 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 16,
+                ),
                 child: Column(
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
                       child: TabBar(
-                        controller: tabController,
+                        controller: controller.tabController,
                         labelColor: AppColors.primaryColor,
                         labelStyle: context.titleLarge,
                         unselectedLabelColor: AppColors.grayTertiaryTextColor,
@@ -124,264 +299,24 @@ class _CalenderScreenState extends State<CalenderScreen> with TickerProviderStat
                         dividerHeight: 1,
                         unselectedLabelStyle: context.titleLarge,
                         dividerColor: Colors.transparent,
-                        tabs: [
-                          Text("Calendar"),
-                          Text("List"),
-                        ],
+                        tabs: [Text("Calendar"), Text("List")],
                       ),
                     ),
                     Gap(16),
                     SizedBox(
-                      height: context.screenHeight/2-92,
+                      height: context.screenHeight * 0.75,
                       child: TabBarView(
-                        controller: tabController,
+                        controller: controller.tabController,
                         children: [
-                          Column(
-                            children: [
-                              EventBasedCalender(
-                                padding: EdgeInsets.all(10),
-                                primaryColor: AppColors.tertiaryTextColor,
-                                backgroundColor: Colors.white,
-                                chooserColor: AppColors.blackMainTextColor,
-                                endYear: 3000,
-                                startYear: 1990,
-                                currentMonthDateColor: Colors.black,
-                                pastFutureMonthDateColor: Colors.grey,
-                                isSelectedColor: AppColors.primaryColor,
-                                onDateTap: (date) {
-                                  print(date);
-                                },
-                                events: [],
-                              ),
-                              Gap(16),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Tuesday, December 26th",
-                                    style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 14.sp,
-                                      color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Edit",
-                                    style: context.titleSmall,
-                                  ),
-                                ],
-                              ),
-                              Gap(16),
-
-                            ],
-                          ),
+                          // Calendar tab
+                          CalendarTabView(),
+                          // List view tab
+                          buildListTab(context, isDarkMode),
                         ],
                       ),
                     ),
                   ],
                 ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16.0,right: 16),
-                child: Column(
-                  spacing: 8,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Available all day".tr,
-                          style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14.sp,
-                            color: isDarkMode ? AppColors.white : const Color(0xFF1D242D),
-                          ),
-                        ),
-                        Transform.scale(
-                          scale: 0.6,
-                          child: Switch(
-                            value: saturdayConnect.value,
-                            onChanged: (newValue) {
-                              saturdayConnect.value = newValue;
-                            },
-                            activeColor: Colors.white,
-                            activeTrackColor: AppColors.orangeSecondaryAccentColor,
-                            inactiveThumbColor: Colors.white,
-                            inactiveTrackColor: const Color(0xFFE5E7EB),
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Mark this day as unavailable".tr,
-                          style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14.sp,
-                            color: isDarkMode ? AppColors.white : const Color(0xFF1D242D),
-                          ),
-                        ),
-                        Transform.scale(
-                          scale: 0.6,
-                          child: Switch(
-                            value: saturdayConnect.value,
-                            onChanged: (newValue) {
-                              saturdayConnect.value = newValue;
-                            },
-                            activeColor: Colors.white,
-                            activeTrackColor: AppColors.orangeSecondaryAccentColor,
-                            inactiveThumbColor: Colors.white,
-                            inactiveTrackColor: const Color(0xFFE5E7EB),
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                  var slot = timeSlots[index];
-                  return Container(
-                    padding: EdgeInsets.only(right: 6,left: 12,top: 6,bottom: 6),
-                    margin: EdgeInsets.only(bottom: 8,left: 16,right: 16),
-                    decoration: BoxDecoration(
-                      color: /*index % 2 == 0 ? Color(0xFFE6F8FF) :*/ Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-
-                    ),
-                    child: Row(
-                      spacing: 10,
-                      children: [
-                        slot['hasMessage'] ?  Text(slot['time'],
-                        style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 14.sp,
-                          color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
-                        ),
-                        ):Text(slot['time'],
-                          style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14.sp,
-                            color: isDarkMode ? AppColors.white : AppColors.primaryColor,
-                          ),
-                        ),
-                        slot['hasMessage'] ?Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFE2F8F8),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                             spacing: 36.w,
-                            children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    width: 30.w,
-                                    height: 30.h,
-                                    child: Assets.images.upcomeingsessionimage.image(),
-                                  ),
-                                ),
-
-                            Text("Ann Smith",style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 14.sp,
-                                  color: isDarkMode ? AppColors.white : AppColors.blackMainTextColor,
-                                ),),
-
-                              GestureDetector(
-                                onTap: (){},
-                                child: CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: AppColors.primaryColor,
-                                  child: Center(
-                                    child:   Assets.icons.messages.svg(colorFilter: ColorFilter.mode(AppColors.white,BlendMode.srcIn )),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ): SizedBox(
-                          width: context.screenWidth * 0.6+20,
-                          child: Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFE2F8F8),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text("Available",style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14.sp,
-                              color: isDarkMode ? AppColors.white : AppColors.primaryColor,
-                            ),),
-                          ),
-                        )
-                      ],
-                    )
-                    /*ListTile(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      leading: CircleAvatar(
-                        radius: 20,
-                        backgroundImage: slot['name'] == 'Ann Smith'
-                            ? AssetImage('assets/ann_smith.jpg') as ImageProvider // Ensure this asset exists in your assets directory
-                            : null, // No image for "Available"
-                        backgroundColor: Colors.grey,
-                      ),
-                      title: Row(
-                        children: [
-                          Text(
-                            slot['time'],
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          if (slot['name'] != 'Available')
-                            Text(
-                              slot['name'],
-                              style: TextStyle(fontSize: 14, color: Colors.black.withValues(alpha: 0.6)),
-                            ),
-                        ],
-                      ),
-                      subtitle: Row(
-                        children: [
-                          Text(
-                            slot['status'],
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.green,
-                            ),
-                          ),
-                          Spacer(),
-                          slot['hasMessage'] ?IconButton(
-                            icon: Icon(
-                              Icons.message,
-                              color: slot['hasMessage'] ? Colors.blue : Colors.grey,
-                            ),
-                            onPressed: () {
-                              print("Message icon tapped for slot $index");
-                            },
-                          ): SizedBox(),
-                        ],
-                      ),
-                    ),*/
-                  );
-                },
-                childCount: timeSlots.length,
               ),
             ),
           ],

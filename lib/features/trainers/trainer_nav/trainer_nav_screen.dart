@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,7 +17,6 @@ class TrainerNavScreen extends StatefulWidget {
 }
 
 class _TrainerNavScreenState extends State<TrainerNavScreen> {
-
   final _controller = Get.find<NavController>();
   @override
   void initState() {
@@ -29,27 +27,20 @@ class _TrainerNavScreenState extends State<TrainerNavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Obx(() {
-              return _controller.getPages()[_controller.selectedNavIndex.value];
-            }),
-          ),
-        ],
-      ),
+      body: Obx(() {
+        return _controller.getPages()[_controller.selectedNavIndex.value];
+      }),
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(bottom: 6, top: 6),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
-
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(
             _controller.icons.length,
-                (index) => Expanded(
+            (index) => Expanded(
               child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: () {
@@ -73,7 +64,9 @@ class _TrainerNavScreenState extends State<TrainerNavScreen> {
                                 shape: BoxShape.circle,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.primaryColor.withValues(alpha: 0.2),
+                                    color: AppColors.primaryColor.withValues(
+                                      alpha: 0.2,
+                                    ),
                                     blurRadius: 4.r,
                                     offset: Offset(0, 4),
                                   ),
@@ -81,12 +74,12 @@ class _TrainerNavScreenState extends State<TrainerNavScreen> {
                               ),
                               padding: EdgeInsets.all(16),
                               child: SvgPicture.asset(
-
                                 _controller.icons[index].path,
                                 colorFilter: ColorFilter.mode(
-                                  isSelected ? AppColors.white : AppColors.white,
+                                  isSelected
+                                      ? AppColors.white
+                                      : AppColors.white,
                                   BlendMode.srcIn,
-
                                 ),
                               ),
                             ),
@@ -103,7 +96,10 @@ class _TrainerNavScreenState extends State<TrainerNavScreen> {
                         SvgPicture.asset(
                           height: 24,
                           _controller.icons[index].path,
-                          colorFilter: ColorFilter.mode(AppColors.grayTertiaryTextColor, BlendMode.srcIn),
+                          colorFilter: ColorFilter.mode(
+                            AppColors.grayTertiaryTextColor,
+                            BlendMode.srcIn,
+                          ),
                         ),
 
                       if (!isSelected)
