@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:my_trainer/core/router/route_path.dart';
 import 'package:my_trainer/features/trainers/client/widgets/list_item_card.dart' hide AppColors;
 import 'package:my_trainer/utils/app_strings/app_strings.dart';
 import 'package:my_trainer/utils/color/app_colors.dart';
@@ -83,7 +85,6 @@ class _BusinessClientScreenState extends State<BusinessClientScreen> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                       (context, index) {
-
                     return  Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: ClientCardWidget(
@@ -92,7 +93,7 @@ class _BusinessClientScreenState extends State<BusinessClientScreen> {
                         remainingSessions: 8,
                         totalSessions: 10,
                         onMessagePressed: () {
-                          print('Message button pressed');
+                         context.pushNamed(RoutePath.chatScreen);
                         },
                       ),
                     );

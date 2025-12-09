@@ -29,11 +29,11 @@ class ClientCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(12),
-       width: context.screenWidth,
+      width: context.screenWidth,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.backgroundsLinesColor,width: 1)
+        border: Border.all(color: AppColors.backgroundsLinesColor, width: 1),
       ),
       margin: EdgeInsets.only(bottom: 8),
       child: Row(
@@ -64,11 +64,11 @@ class ClientCardWidget extends StatelessWidget {
                 Row(
                   spacing: 6,
                   children: [
-                    Icon(Iconsax.calendar,size: 16,),
+                    Icon(Iconsax.calendar, size: 16),
                     Text(
                       "Next meeting: tomorrow",
                       style: context.labelSmall.copyWith(
-                        color: AppColors.blackMainTextColor
+                        color: AppColors.blackMainTextColor,
                       ),
                     ),
                   ],
@@ -76,48 +76,47 @@ class ClientCardWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "remaining session ",
-                      style: context.labelLarge,
-                    ),
+                    Text("remaining session ", style: context.labelLarge),
 
                     RichText(
-
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: '8  ',
-                            style: context.labelLarge.copyWith(color: AppColors.primaryColor),
-
+                            style: context.labelLarge.copyWith(
+                              color: AppColors.primaryColor,
+                            ),
                           ),
 
-                          TextSpan(
-                            text: 'of 10',
-                            style: context.labelSmall
-                          ),
-
+                          TextSpan(text: 'of 10', style: context.labelSmall),
                         ],
                       ),
                     ),
-
                   ],
                 ),
                 FilledButton(
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(AppColors.primaryColor),
+                    backgroundColor: WidgetStateProperty.all(
+                      AppColors.primaryColor,
+                    ),
                   ),
-                  onPressed: () {},
+                  onPressed: onMessagePressed,
                   child: Center(
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Assets.icons.messages.svg(
-                          colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+                          colorFilter: ColorFilter.mode(
+                            AppColors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                         Text(
                           AppStrings.message.tr,
-                          style: context.titleSmall.copyWith(color: Colors.white),
+                          style: context.titleSmall.copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -126,49 +125,6 @@ class ClientCardWidget extends StatelessWidget {
               ],
             ),
           ),
-            /*      Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Client Name
-                Text(
-                  name,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 4),
-                // Next Meeting
-                Text(
-                  nextMeeting,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(height: 4),
-                // Remaining Sessions
-                Text(
-                  '$remainingSessions of $totalSessions sessions remaining',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.blueAccent,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Message Button
-          ElevatedButton(
-            onPressed: onMessagePressed,
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(), backgroundColor: Colors.teal,
-              padding: EdgeInsets.all(16), // Button color
-            ),
-            child: Icon(Icons.message),
-          ),*/
         ],
       ),
     );
